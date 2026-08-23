@@ -1,0 +1,523 @@
+<title>Matchday Sheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --turf: #1b4332;
+    --turf-stripe: #17392a;
+    --turf-line: rgba(238, 243, 234, 0.55);
+    --chalk: #eef3ea;
+    --armband: #d9a441;
+    --armband-ink: #4a3110;
+
+    --ink: #13201b;
+    --ink-soft: #48584f;
+    --paper: #f3f5f0;
+    --panel: #ffffff;
+    --panel-border: #dde2d7;
+    --dugout: #cdd3c6;
+    --dugout-card: #e4e7de;
+
+    --keep: #3f8f5c;
+    --hold: #b8923a;
+    --sell-soft: #cc7a35;
+    --sell: #b8463f;
+
+    --shadow: 0 1px 2px rgba(19, 32, 27, 0.06), 0 6px 20px rgba(19, 32, 27, 0.07);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #eef1ea;
+      --ink-soft: #aab5a9;
+      --paper: #0c1310;
+      --panel: #131c17;
+      --panel-border: #22302a;
+      --dugout: #17211b;
+      --dugout-card: #1d2921;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ink: #eef1ea;
+    --ink-soft: #aab5a9;
+    --paper: #0c1310;
+    --panel: #131c17;
+    --panel-border: #22302a;
+    --dugout: #17211b;
+    --dugout-card: #1d2921;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.35);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Work Sans", ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .sheet {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 28px 16px 64px;
+  }
+
+  .masthead {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+
+  .masthead .kicker {
+    font-family: "Big Shoulders Display", ui-sans-serif, sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  .masthead .gw {
+    font-family: "Big Shoulders Display", ui-sans-serif, sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+    letter-spacing: 0.06em;
+    color: var(--paper);
+    background: var(--ink);
+    padding: 4px 12px 3px;
+    border-radius: 3px;
+  }
+
+  h1 {
+    font-family: "Big Shoulders Display", ui-sans-serif, sans-serif;
+    font-weight: 800;
+    font-size: clamp(34px, 8vw, 48px);
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    margin: 2px 0 14px;
+    text-wrap: balance;
+  }
+
+  .verdict-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 22px;
+    flex-wrap: wrap;
+  }
+
+  .rating {
+    font-family: "Big Shoulders Display", ui-sans-serif, sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    color: var(--armband-ink);
+    background: var(--armband);
+    padding: 5px 12px 3px;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+
+  .verdict-text {
+    font-size: 15px;
+    color: var(--ink-soft);
+    max-width: 46ch;
+  }
+
+  .stat-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 1px;
+    background: var(--panel-border);
+    border: 1px solid var(--panel-border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 26px;
+  }
+
+  .stat {
+    background: var(--panel);
+    padding: 10px 14px;
+  }
+
+  .stat .label {
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 3px;
+  }
+
+  .stat .value {
+    font-family: "Big Shoulders Display", ui-sans-serif, sans-serif;
+    font-weight: 700;
+    font-size: 19px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .pitch {
+    position: relative;
+    background:
+      repeating-linear-gradient(
+        to bottom,
+        var(--turf) 0,
+        var(--turf) 44px,
+        var(--turf-stripe) 44px,
+        var(--turf-stripe) 88px
+      );
+    border-radius: 14px;
+    padding: 22px 12px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .pitch::before {
+    content: "";
+    position: absolute;
+    inset: 10px;
+    border: 1.5px solid var(--turf-line);
+    border-radius: 8px;
+    pointer-events: none;
+  }
+
+  .pitch::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 10px;
+    bottom: 10px;
+    width: 0;
+    border-left: 1.5px solid var(--turf-line);
+    pointer-events: none;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(78px, 1fr));
+    gap: 8px;
+    padding: 10px 6px;
+    position: relative;
+  }
+
+  .row-label {
+    position: absolute;
+    left: 4px;
+    top: 4px;
+    font-family: "Big Shoulders Display", ui-sans-serif, sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--turf-line);
+    opacity: 0.8;
+  }
+
+  .card {
+    position: relative;
+    background: var(--panel);
+    border-radius: 8px;
+    padding: 8px 6px 7px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    border-top: 3px solid var(--club);
+  }
+
+  .card .badge-row {
+    display: flex;
+    justify-content: center;
+    gap: 3px;
+    position: absolute;
+    top: -8px;
+    right: -6px;
+  }
+
+  .pin {
+    font-family: "Big Shoulders Display", ui-sans-serif, sans-serif;
+    font-weight: 800;
+    font-size: 10.5px;
+    line-height: 1;
+    padding: 3px 5px 2px;
+    border-radius: 20px;
+    color: var(--armband-ink);
+    background: var(--armband);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+  }
+
+  .pin.vc {
+    background: var(--chalk);
+    color: var(--ink);
+    border: 1.5px solid var(--armband);
+  }
+
+  .club-code {
+    font-family: "Big Shoulders Display", ui-sans-serif, sans-serif;
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    color: var(--club);
+  }
+
+  .name {
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 1.15;
+    margin: 2px 0 3px;
+    color: var(--ink);
+  }
+
+  .price {
+    font-family: "Big Shoulders Display", ui-sans-serif, sans-serif;
+    font-variant-numeric: tabular-nums;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    margin-bottom: 5px;
+  }
+
+  .dot-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--v-color);
+  }
+
+  .dot-label {
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: var(--v-color);
+    text-transform: uppercase;
+  }
+
+  .dugout {
+    background: var(--dugout);
+    border-radius: 12px;
+    margin-top: 10px;
+    padding: 14px 12px 16px;
+  }
+
+  .dugout-label {
+    font-family: "Big Shoulders Display", ui-sans-serif, sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0 0 10px 2px;
+  }
+
+  .bench-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 8px;
+  }
+
+  .bench-card {
+    background: var(--dugout-card);
+    border-radius: 8px;
+    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    opacity: 0.92;
+    border-left: 3px solid var(--club);
+  }
+
+  .bench-num {
+    font-family: "Big Shoulders Display", ui-sans-serif, sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+    color: var(--ink-soft);
+    width: 16px;
+    flex-shrink: 0;
+  }
+
+  .bench-info { min-width: 0; flex: 1; }
+
+  .bench-name {
+    font-weight: 600;
+    font-size: 12.5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .bench-meta {
+    font-size: 10.5px;
+    color: var(--ink-soft);
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 22px;
+    padding-top: 14px;
+    border-top: 1px solid var(--panel-border);
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    color: var(--ink-soft);
+  }
+
+  .legend-item .dot { width: 8px; height: 8px; }
+
+  .footnote {
+    margin-top: 18px;
+    font-size: 11px;
+    color: var(--ink-soft);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .card, .bench-card { transition: transform 0.15s ease; }
+    .card:hover, .bench-card:hover { transform: translateY(-1px); }
+  }
+</style>
+
+<div class="sheet">
+  <div class="masthead">
+    <span class="kicker">Trent Ellis &middot; Matchday Sheet</span>
+    <span class="gw">GW2</span>
+  </div>
+  <h1>Best XI for the weekend</h1>
+  <div class="verdict-row">
+    <span class="rating">7/10</span>
+    <span class="verdict-text">Solid core, two live issues to manage &mdash; Porro's fitness and Semenyo's role at City. Nothing here needs a transfer yet.</span>
+  </div>
+
+  <div class="stat-strip">
+    <div class="stat"><div class="label">Bank</div><div class="value">£0.0m</div></div>
+    <div class="stat"><div class="label">Free transfers</div><div class="value">1</div></div>
+    <div class="stat"><div class="label">Team value</div><div class="value">£100.0m</div></div>
+    <div class="stat"><div class="label">Chips used</div><div class="value">None</div></div>
+    <div class="stat"><div class="label">Overall rank</div><div class="value">4,091,829</div></div>
+  </div>
+
+  <div class="pitch">
+    <div class="row" id="row-fwd"><span class="row-label">FWD</span></div>
+    <div class="row" id="row-mid"><span class="row-label">MID</span></div>
+    <div class="row" id="row-def"><span class="row-label">DEF</span></div>
+    <div class="row" id="row-gk"><span class="row-label">GK</span></div>
+  </div>
+
+  <div class="dugout">
+    <div class="dugout-label">Bench</div>
+    <div class="bench-row" id="bench-row"></div>
+  </div>
+
+  <div class="legend" id="legend"></div>
+
+  <div class="footnote">Squad data pulled from the official FPL API &middot; verdicts from the weekly Claude review &middot; refreshes automatically each Gameweek.</div>
+</div>
+
+<script>
+  const CLUB_COLOR = {
+    ARS: "#EF0107", MUN: "#DA291C", COV: "#6CACE4", TOT: "#132257",
+    CRY: "#C4122E", MCI: "#6CABDD", CHE: "#034694", BOU: "#DA291C",
+    HUL: "#F5A100", FUL: "#1E1E1E"
+  };
+
+  const VERDICT = {
+    KEEP:  { color: "var(--keep)", label: "Keep" },
+    HOLD:  { color: "var(--hold)", label: "Hold" },
+    SELL_SOFT: { color: "var(--sell-soft)", label: "Sell if possible" },
+    SELL:  { color: "var(--sell)", label: "Sell" }
+  };
+
+  const XI = {
+    fwd: [
+      { name: "Haaland", club: "MCI", price: "15.5", verdict: "KEEP", tag: "C" },
+      { name: "João Pedro", club: "CHE", price: "7.5", verdict: "KEEP" }
+    ],
+    mid: [
+      { name: "Semenyo", club: "MCI", price: "8.5", verdict: "HOLD" },
+      { name: "B.Fernandes", club: "MUN", price: "12.0", verdict: "KEEP", tag: "V" },
+      { name: "Tzolis", club: "ARS", price: "6.5", verdict: "KEEP" },
+      { name: "Slater", club: "HUL", price: "4.5", verdict: "KEEP" }
+    ],
+    def: [
+      { name: "Maguire", club: "MUN", price: "5.0", verdict: "HOLD" },
+      { name: "Gabriel", club: "ARS", price: "8.0", verdict: "KEEP" },
+      { name: "Thomas", club: "COV", price: "4.0", verdict: "KEEP" },
+      { name: "van Ewijk", club: "COV", price: "4.0", verdict: "KEEP" }
+    ],
+    gk: [
+      { name: "Raya", club: "ARS", price: "6.0", verdict: "KEEP" }
+    ]
+  };
+
+  const BENCH = [
+    { name: "Forster", club: "BOU", pos: "GK", verdict: "KEEP", note: "Cover" },
+    { name: "Pedro Porro", club: "TOT", pos: "DEF", verdict: "HOLD", note: "Injured, back ~29 Aug" },
+    { name: "Hughes", club: "CRY", pos: "MID", verdict: "HOLD", note: "0 mins GW1" },
+    { name: "Kusi-Asare", club: "FUL", pos: "FWD", verdict: "HOLD", note: "Enabler" }
+  ];
+
+  function cardHTML(p) {
+    const v = VERDICT[p.verdict];
+    const club = CLUB_COLOR[p.club] || "#8a8f6b";
+    const pin = p.tag === "C"
+      ? '<span class="pin">C</span>'
+      : p.tag === "V"
+        ? '<span class="pin vc">V</span>'
+        : "";
+    return `
+      <div class="card" style="--club:${club}">
+        <div class="badge-row">${pin}</div>
+        <div class="club-code">${p.club}</div>
+        <div class="name">${p.name}</div>
+        <div class="price">£${p.price}m</div>
+        <div class="dot-row">
+          <span class="dot" style="--v-color:${v.color}"></span>
+          <span class="dot-label" style="--v-color:${v.color}">${v.label}</span>
+        </div>
+      </div>`;
+  }
+
+  function benchHTML(p, i) {
+    const v = VERDICT[p.verdict];
+    const club = CLUB_COLOR[p.club] || "#8a8f6b";
+    return `
+      <div class="bench-card" style="--club:${club}">
+        <span class="bench-num">${i + 1}</span>
+        <div class="bench-info">
+          <div class="bench-name">${p.name} <span style="color:var(--ink-soft); font-weight:500;">(${p.club})</span></div>
+          <div class="bench-meta">
+            <span class="dot" style="--v-color:${v.color}"></span>
+            <span>${p.pos} &middot; ${p.note}</span>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  document.getElementById("row-fwd").insertAdjacentHTML("beforeend", XI.fwd.map(cardHTML).join(""));
+  document.getElementById("row-mid").insertAdjacentHTML("beforeend", XI.mid.map(cardHTML).join(""));
+  document.getElementById("row-def").insertAdjacentHTML("beforeend", XI.def.map(cardHTML).join(""));
+  document.getElementById("row-gk").insertAdjacentHTML("beforeend", XI.gk.map(cardHTML).join(""));
+  document.getElementById("bench-row").innerHTML = BENCH.map(benchHTML).join("");
+
+  document.getElementById("legend").innerHTML = Object.values(VERDICT).map(v =>
+    `<span class="legend-item"><span class="dot" style="--v-color:${v.color}"></span>${v.label}</span>`
+  ).join("");
+</script>
