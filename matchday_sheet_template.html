@@ -393,6 +393,112 @@
     .card, .bench-card { transition: transform 0.15s ease; }
     .card:hover, .bench-card:hover { transform: translateY(-1px); }
   }
+
+  .card, .bench-card { cursor: pointer; }
+
+  .card:focus-visible, .bench-card:focus-visible {
+    outline: 2px solid var(--armband);
+    outline-offset: 2px;
+  }
+
+  .tap-hint {
+    font-size: 10.5px;
+    color: var(--ink-soft);
+    text-align: center;
+    margin: 10px 0 0;
+    opacity: 0.75;
+  }
+
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(12, 19, 16, 0.55);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 0;
+    z-index: 20;
+  }
+
+  .modal-backdrop[hidden] { display: none; }
+
+  .modal {
+    background: var(--panel);
+    color: var(--ink);
+    width: 100%;
+    max-width: 480px;
+    border-radius: 16px 16px 0 0;
+    padding: 20px 20px 28px;
+    box-shadow: var(--shadow);
+    border-top: 4px solid var(--club, var(--armband));
+    position: relative;
+    max-height: 82vh;
+    overflow-y: auto;
+  }
+
+  @media (min-width: 560px) {
+    .modal-backdrop { align-items: center; padding: 24px; }
+    .modal { border-radius: 16px; }
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    background: var(--dugout-card);
+    color: var(--ink);
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .modal-close:focus-visible { outline: 2px solid var(--armband); outline-offset: 2px; }
+
+  .modal-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+  }
+
+  .modal h2 {
+    font-family: "Big Shoulders Display", ui-sans-serif, sans-serif;
+    font-weight: 800;
+    font-size: 26px;
+    margin: 0;
+    line-height: 1;
+  }
+
+  .modal-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0 16px;
+  }
+
+  .modal-verdict-pill {
+    font-family: "Big Shoulders Display", ui-sans-serif, sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--paper);
+    background: var(--v-color, var(--ink-soft));
+    padding: 4px 10px 3px;
+    border-radius: 20px;
+  }
+
+  .modal-blurb {
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin: 0;
+  }
 </style>
 
 <div class="sheet">
@@ -426,9 +532,27 @@
     <div class="bench-row" id="bench-row"></div>
   </div>
 
+  <p class="tap-hint">Tap any player for the reasoning behind their verdict.</p>
+
   <div class="legend" id="legend"></div>
 
   <div class="footnote">Squad data pulled from the official FPL API &middot; verdicts from the weekly Claude review &middot; refreshes automatically each Gameweek.</div>
+</div>
+
+<div class="modal-backdrop" id="modal-backdrop" hidden>
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-name">
+    <button class="modal-close" id="modal-close" type="button" aria-label="Close">&times;</button>
+    <div class="modal-head">
+      <span class="club-code" id="modal-club"></span>
+      <span class="pin" id="modal-pin" hidden></span>
+    </div>
+    <h2 id="modal-name"></h2>
+    <div class="modal-meta">
+      <span class="price" id="modal-price" style="margin-bottom:0;"></span>
+      <span class="modal-verdict-pill" id="modal-verdict-pill"></span>
+    </div>
+    <p class="modal-blurb" id="modal-blurb"></p>
+  </div>
 </div>
 
 <script>
@@ -447,32 +571,52 @@
 
   const XI = {
     fwd: [
-      { name: "Haaland", club: "MCI", price: "15.5", verdict: "KEEP", tag: "C" },
-      { name: "João Pedro", club: "CHE", price: "7.5", verdict: "KEEP" }
+      { name: "Haaland", club: "MCI", price: "15.5", verdict: "KEEP", tag: "C",
+        blurb: "The best captain option in FPL. Nailed #1 penalty taker for Man City, nothing tougher than FDR4 in this fixture window, and an explosive scoring range nobody else in the game matches." },
+      { name: "João Pedro", club: "CHE", price: "7.5", verdict: "KEEP",
+        blurb: "Chelsea's undisputed #9 and 64% owned for good reason. Tough fixture at Arsenal in GW3, but otherwise a clear keep with no competition for the striker role." }
     ],
     mid: [
-      { name: "Semenyo", club: "MCI", price: "8.5", verdict: "HOLD" },
-      { name: "B.Fernandes", club: "MUN", price: "12.0", verdict: "KEEP", tag: "V" },
-      { name: "Tzolis", club: "ARS", price: "6.5", verdict: "KEEP" },
-      { name: "Slater", club: "HUL", price: "4.5", verdict: "KEEP" }
+      { name: "Semenyo", club: "MCI", price: "8.5", verdict: "HOLD",
+        blurb: "Signed by Man City from Bournemouth for roughly £64m back in January — no longer a nailed 90-minute starter, competing with Foden, Savinho, Doku and Grealish under a manager who rotates heavily. Real quality (17 combined PL goals last season) but the role is unproven. Hold until his first City appearance shows how involved he actually is." },
+      { name: "B.Fernandes", club: "MUN", price: "12.0", verdict: "KEEP", tag: "V",
+        blurb: "Quiet 2-point start, but still Man Utd's #1 penalty taker and their best chance creator (0.26 xA in GW1). One of the most reliable vice-captain picks in the game outside of Haaland himself." },
+      { name: "Tzolis", club: "ARS", price: "6.5", verdict: "KEEP",
+        blurb: "6 points in GW1 with strong underlying numbers (0.19 xG, 0.14 xA in 75 minutes) — outperforming much pricier Arsenal teammates while still only 25% owned. The best differential in the squad right now." },
+      { name: "Slater", club: "HUL", price: "4.5", verdict: "KEEP",
+        blurb: "6 points in GW1 (0.44 xA) at just £4.5m — better underlying output than Hughes at a similar price. Ready-made free cover, started ahead of Hughes in this week's XI without costing a transfer." }
     ],
     def: [
-      { name: "Maguire", club: "MUN", price: "5.0", verdict: "HOLD" },
-      { name: "Gabriel", club: "ARS", price: "8.0", verdict: "KEEP" },
-      { name: "Thomas", club: "COV", price: "4.0", verdict: "KEEP" },
-      { name: "van Ewijk", club: "COV", price: "4.0", verdict: "KEEP" }
+      { name: "Maguire", club: "MUN", price: "5.0", verdict: "HOLD",
+        blurb: "1 point from GW1, but the underlying numbers were fine (0.40 xA). Man Utd's defense is historically inconsistent and the fixtures ahead are mixed. He's your 4th defender, not a player to build around — comfortable to hold, not worth a transfer." },
+      { name: "Gabriel", club: "ARS", price: "8.0", verdict: "KEEP",
+        blurb: "5 points in GW1 — a clean sheet plus real attacking threat. One of the best defensive assets in the game: set-piece involvement, goal threat, and Arsenal's defense is elite. Clear keep." },
+      { name: "Thomas", club: "COV", price: "4.0", verdict: "KEEP",
+        blurb: "3 points in GW1 as a budget enabler, and already hit the new DEFCON threshold (10 combined clearances/blocks/interceptions/tackles) for the bonus 2 points. Doing exactly the job a £4.0m defender should." },
+      { name: "van Ewijk", club: "COV", price: "4.0", verdict: "KEEP",
+        blurb: "Started and played 90 minutes in GW1 for Coventry (1 point). Ready-made free cover for the injured Porro this week without needing to spend a transfer." }
     ],
     gk: [
-      { name: "Raya", club: "ARS", price: "6.0", verdict: "KEEP" }
+      { name: "Raya", club: "ARS", price: "6.0", verdict: "KEEP",
+        blurb: "Kept a clean sheet for 6 points in GW1. Arsenal's defense is among the best in the league and he's the highest-owned keeper for good reason — no changes needed here." }
     ]
   };
 
   const BENCH = [
-    { name: "Forster", club: "BOU", pos: "GK", verdict: "KEEP", note: "Cover" },
-    { name: "Pedro Porro", club: "TOT", pos: "DEF", verdict: "HOLD", note: "Injured, back ~29 Aug" },
-    { name: "Hughes", club: "CRY", pos: "MID", verdict: "HOLD", note: "0 mins GW1" },
-    { name: "Kusi-Asare", club: "FUL", pos: "FWD", verdict: "HOLD", note: "Enabler" }
+    { name: "Forster", club: "BOU", pos: "GK", verdict: "KEEP", note: "Cover",
+      blurb: "Pure bench-fodder goalkeeper at £4.0m behind Raya — doing exactly the job it's priced to do. No changes needed." },
+    { name: "Pedro Porro", club: "TOT", pos: "DEF", verdict: "HOLD", note: "Injured, back ~29 Aug",
+      blurb: "Not injured in the usual sense — he played the full World Cup final for Spain and returned to Spurs after missing all of preseason. Archie Gray started at right-back in his place for the opener. Hold given your £0 bank, but watch whether Gray keeps the shirt over the next couple of matches — that's the real signal for whether Porro needs replacing rather than just benching." },
+    { name: "Hughes", club: "CRY", pos: "MID", verdict: "HOLD", note: "0 mins GW1",
+      blurb: "Played 0 minutes in GW1 despite being fit — Wharton, Kamada and McNeil were preferred in Palace's midfield. No analyst coverage suggests an actual demotion (he was a vice-captain last season), so this could be squad rotation for a European fixture rather than a lasting change. One more benching next week would be the real signal — Ndiaye at Everton is the top upgrade target if so." },
+    { name: "Kusi-Asare", club: "FUL", pos: "FWD", verdict: "HOLD", note: "Enabler",
+      blurb: "Cheap enabler at Fulham with no real minutes expectation. Pure budget filler to hit £100m, nothing more expected of him." }
   ];
+
+  let uid = 0;
+  const PLAYERS_BY_ID = {};
+  function tagPlayer(p) { p.id = "p" + (uid++); PLAYERS_BY_ID[p.id] = p; return p; }
+  [...XI.fwd, ...XI.mid, ...XI.def, ...XI.gk, ...BENCH].forEach(tagPlayer);
 
   function cardHTML(p) {
     const v = VERDICT[p.verdict];
@@ -483,7 +627,7 @@
         ? '<span class="pin vc">V</span>'
         : "";
     return `
-      <div class="card" style="--club:${club}">
+      <div class="card" style="--club:${club}" data-id="${p.id}" tabindex="0" role="button" aria-haspopup="dialog">
         <div class="badge-row">${pin}</div>
         <div class="club-code">${p.club}</div>
         <div class="name">${p.name}</div>
@@ -499,7 +643,7 @@
     const v = VERDICT[p.verdict];
     const club = CLUB_COLOR[p.club] || "#8a8f6b";
     return `
-      <div class="bench-card" style="--club:${club}">
+      <div class="bench-card" style="--club:${club}" data-id="${p.id}" tabindex="0" role="button" aria-haspopup="dialog">
         <span class="bench-num">${i + 1}</span>
         <div class="bench-info">
           <div class="bench-name">${p.name} <span style="color:var(--ink-soft); font-weight:500;">(${p.club})</span></div>
@@ -520,4 +664,56 @@
   document.getElementById("legend").innerHTML = Object.values(VERDICT).map(v =>
     `<span class="legend-item"><span class="dot" style="--v-color:${v.color}"></span>${v.label}</span>`
   ).join("");
+
+  // --- Player detail modal ---------------------------------------------
+  const backdrop = document.getElementById("modal-backdrop");
+  const modal = document.getElementById("modal");
+  let lastFocused = null;
+
+  function openModal(id) {
+    const p = PLAYERS_BY_ID[id];
+    if (!p) return;
+    const v = VERDICT[p.verdict];
+    const club = CLUB_COLOR[p.club] || "#8a8f6b";
+
+    modal.style.setProperty("--club", club);
+    document.getElementById("modal-club").textContent = p.club + (p.pos ? " · " + p.pos : "");
+    document.getElementById("modal-name").textContent = p.name;
+    document.getElementById("modal-price").textContent = p.price ? "£" + p.price + "m" : "";
+    const verdictPill = document.getElementById("modal-verdict-pill");
+    verdictPill.textContent = v.label;
+    verdictPill.style.setProperty("--v-color", v.color);
+    document.getElementById("modal-blurb").textContent = p.blurb || "No detail available for this player yet.";
+
+    const pinEl = document.getElementById("modal-pin");
+    if (p.tag === "C") { pinEl.hidden = false; pinEl.textContent = "Captain"; pinEl.className = "pin"; }
+    else if (p.tag === "V") { pinEl.hidden = false; pinEl.textContent = "Vice-captain"; pinEl.className = "pin vc"; }
+    else { pinEl.hidden = true; }
+
+    lastFocused = document.activeElement;
+    backdrop.hidden = false;
+    document.getElementById("modal-close").focus();
+  }
+
+  function closeModal() {
+    backdrop.hidden = true;
+    if (lastFocused) lastFocused.focus();
+  }
+
+  document.querySelector(".sheet").addEventListener("click", (e) => {
+    const card = e.target.closest("[data-id]");
+    if (card) openModal(card.dataset.id);
+  });
+
+  document.querySelector(".sheet").addEventListener("keydown", (e) => {
+    if (e.key !== "Enter" && e.key !== " ") return;
+    const card = e.target.closest("[data-id]");
+    if (card) { e.preventDefault(); openModal(card.dataset.id); }
+  });
+
+  document.getElementById("modal-close").addEventListener("click", closeModal);
+  backdrop.addEventListener("click", (e) => { if (e.target === backdrop) closeModal(); });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !backdrop.hidden) closeModal();
+  });
 </script>
