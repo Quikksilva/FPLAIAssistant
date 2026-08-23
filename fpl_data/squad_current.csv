@@ -1,0 +1,16 @@
+web_name,team_short,position,squad_slot,is_starting,is_captain,is_vice_captain,multiplier,current_price,purchase_price,status,news
+Raya,ARS,GKP,1,True,False,False,1,6.0,,a,
+Maguire,MUN,DEF,2,True,False,False,1,5.0,,a,
+Gabriel,ARS,DEF,3,True,False,False,1,8.0,,a,
+Thomas,COV,DEF,4,True,False,False,1,4.0,,a,
+Pedro Porro,TOT,DEF,5,True,False,False,1,5.5,,i,Lack of match fitness - Expected back 29 Aug
+Hughes,CRY,MID,6,True,False,False,1,4.5,,a,
+Semenyo,MCI,MID,7,True,False,False,1,8.5,,a,
+B.Fernandes,MUN,MID,8,True,False,True,1,12.0,,a,
+Tzolis,ARS,MID,9,True,False,False,1,6.5,,a,
+João Pedro,CHE,FWD,10,True,False,False,1,7.5,,a,
+Haaland,MCI,FWD,11,True,True,False,2,15.5,,a,
+Forster,BOU,GKP,12,False,False,False,0,4.0,,a,
+van Ewijk,COV,DEF,13,False,False,False,0,4.0,,a,
+Slater,HUL,MID,14,False,False,False,0,4.5,,a,
+Kusi-Asare,FUL,FWD,15,False,False,False,0,4.5,,a,

@@ -1,0 +1,11 @@
+{
+  "current_event_id": 1,
+  "current_event_name": "Gameweek 1",
+  "current_event_finished": false,
+  "current_event_data_checked": false,
+  "most_recently_finished_event_id": null,
+  "most_recently_finished_event_data_checked": null,
+  "next_event_id": 2,
+  "next_event_deadline": "2026-08-28T17:30:00Z",
+  "checked_at_utc": "2026-08-23T01:49:58.238106+00:00"
+}
