@@ -230,3 +230,44 @@ Writes to an `fpl_data/` folder next to the script:
 2. Get the missing squad details above (bank, FTs, chips, rank, GW number) from Trent.
 3. Confirm Pedro Porro's actual news/status.
 4. Then produce the first structured Gameweek review using the format in section 21 above.
+
+> **Note (23 Aug 2026):** items 2 and 3 above are now solved automatically — see "Automation" below.
+> `fpl_data_pull.py` pulls the manager's actual squad/bank/FTs/chips/rank straight from the
+> public FPL API via a Team ID, so there's no need to ask Trent for these each session anymore.
+
+---
+
+## Automation (added 23 Aug 2026)
+
+This project now runs mostly hands-off. Full details in `README.md`, but in short:
+
+- **GitHub repo:** https://github.com/Quikksilva/FPLAIAssistant (private) — this whole folder is
+  pushed there. `git pull` before making local edits if it's been a while, since the automation
+  below commits to it independently of any local session.
+- **GitHub Actions** (`.github/workflows/fpl_data_pull.yml`) runs daily (08:00 UTC) on GitHub's
+  own servers, fetches fresh FPL data, and commits it back. This exists because Claude's cloud
+  routine environment cannot reach `fantasy.premierleague.com` directly (network policy blocks it).
+- **Claude cloud routine** ("FPL Weekly Review", id `trig_01Uyx3Toik3scZx7WvNzHTxm`, managed via
+  the `RemoteTrigger` tool) runs daily (10:00 UTC), checks `fpl_data/gw_status.json` +
+  `fpl_data/last_reviewed_event.txt` to detect when a Gameweek has just locked in, and if so:
+  writes the full Weekly Review, regenerates `matchday_sheet_template.html` with fresh
+  verdicts/blurbs, republishes it to the existing artifact URL, and notifies Trent by email/push.
+- **Matchday Sheet artifact:** https://claude.ai/code/artifact/b88f5b1b-b3b0-4e4b-81b6-6f07b4d00616
+  — a pitch-view visual of the recommended Best XI + bench, tap/click any player for the reasoning
+  behind their verdict. Source template lives at `matchday_sheet_template.html` in this repo; it's
+  a finished design — regenerate its data, don't redesign its CSS/layout.
+
+### Reviewing someone else's team (ad hoc, in chat only)
+
+`fpl_data_pull.py` accepts any FPL Team ID as its first CLI argument (or via the `FPL_TEAM_ID` env
+var), e.g. `python fpl_data_pull.py 1234567` — it'll pull that manager's squad/bank/FTs/chips/rank
+instead of Trent's default (5919706) and write it to the same `fpl_data/manager_summary.csv` /
+`squad_current.csv` files. Use this when Trent (or anyone he shares the Matchday Sheet with) asks
+to review a different team ID in a live chat session.
+
+There is **no public self-serve web tool** for this — that would require a paid Anthropic API key
+with its own billing plus real hosting, which Trent explicitly decided against (23 Aug 2026). The
+Matchday Sheet artifact has a "Not you? Get your own review" banner that only generates a
+ready-to-paste chat prompt — it does not fetch data or call an LLM on its own. Don't build actual
+public/automated multi-tenant infrastructure for this without Trent explicitly re-opening that
+conversation, since it has real cost and abuse-exposure implications for his account.
