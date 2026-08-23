@@ -499,9 +499,116 @@
     color: var(--ink);
     margin: 0;
   }
+
+  .id-banner {
+    background: var(--dugout-card);
+    border: 1px solid var(--panel-border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 20px;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+  }
+
+  .id-banner-default {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .id-banner-default strong { color: var(--ink); }
+
+  .id-banner-link {
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--armband-ink);
+    font-weight: 600;
+    font-size: 12.5px;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .id-banner-link:focus-visible { outline: 2px solid var(--armband); outline-offset: 2px; }
+
+  .id-banner-form label {
+    display: block;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+
+  .id-banner-row {
+    display: flex;
+    gap: 8px;
+  }
+
+  .id-banner-row input {
+    flex: 1;
+    min-width: 0;
+    font-family: "Work Sans", sans-serif;
+    font-size: 13px;
+    padding: 7px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--panel-border);
+    background: var(--panel);
+    color: var(--ink);
+  }
+
+  .id-banner-row input:focus-visible { outline: 2px solid var(--armband); outline-offset: 1px; }
+  .id-banner-row input[aria-invalid="true"] { border-color: var(--sell); }
+
+  .id-banner-go {
+    font-family: "Big Shoulders Display", ui-sans-serif, sans-serif;
+    font-weight: 700;
+    font-size: 12.5px;
+    letter-spacing: 0.02em;
+    color: var(--armband-ink);
+    background: var(--armband);
+    border: none;
+    border-radius: 6px;
+    padding: 0 14px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .id-banner-go:focus-visible { outline: 2px solid var(--ink); outline-offset: 1px; }
+
+  .id-banner-hint {
+    margin: 8px 0 0;
+    font-size: 11px;
+    line-height: 1.5;
+  }
+
+  .id-banner-hint strong { color: var(--ink); }
 </style>
 
 <div class="sheet">
+  <div class="id-banner" id="id-banner">
+    <div class="id-banner-default" id="id-banner-default">
+      <span>Showing <strong>Trent's</strong> squad.</span>
+      <button class="id-banner-link" id="id-banner-switch" type="button">Not you? Get your own review &rarr;</button>
+    </div>
+    <div class="id-banner-form" id="id-banner-form" hidden>
+      <label for="id-banner-input">Your FPL Team ID</label>
+      <div class="id-banner-row">
+        <input type="text" id="id-banner-input" inputmode="numeric" placeholder="e.g. 1234567" autocomplete="off" />
+        <button class="id-banner-go" id="id-banner-go" type="button">Get request</button>
+      </div>
+      <p class="id-banner-hint">Find it at fantasy.premierleague.com &rarr; Points &mdash; it's the number in the URL: fantasy.premierleague.com/entry/<strong>XXXXXXX</strong>/event/1</p>
+    </div>
+    <div class="id-banner-result" id="id-banner-result" hidden>
+      <p class="id-banner-hint" style="margin-bottom:8px;">Paste this into a Claude Code conversation to get your own Matchday Sheet:</p>
+      <div class="id-banner-row">
+        <input type="text" id="id-banner-output" readonly />
+        <button class="id-banner-go" id="id-banner-copy" type="button">Copy</button>
+      </div>
+    </div>
+  </div>
+
   <div class="masthead">
     <span class="kicker">Trent Ellis &middot; Matchday Sheet</span>
     <span class="gw">GW2</span>
@@ -715,5 +822,49 @@
   backdrop.addEventListener("click", (e) => { if (e.target === backdrop) closeModal(); });
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && !backdrop.hidden) closeModal();
+  });
+
+  // --- "Get your own review" team ID banner -----------------------------
+  const bannerDefault = document.getElementById("id-banner-default");
+  const bannerForm = document.getElementById("id-banner-form");
+  const bannerResult = document.getElementById("id-banner-result");
+  const bannerInput = document.getElementById("id-banner-input");
+  const bannerGo = document.getElementById("id-banner-go");
+  const bannerOutput = document.getElementById("id-banner-output");
+  const bannerCopy = document.getElementById("id-banner-copy");
+
+  document.getElementById("id-banner-switch").addEventListener("click", () => {
+    bannerDefault.hidden = true;
+    bannerForm.hidden = false;
+    bannerInput.focus();
+  });
+
+  function submitTeamId() {
+    const id = bannerInput.value.trim();
+    if (!/^\d+$/.test(id)) {
+      bannerInput.setAttribute("aria-invalid", "true");
+      bannerInput.focus();
+      return;
+    }
+    bannerInput.removeAttribute("aria-invalid");
+    bannerOutput.value = `Review my FPL team (Team ID ${id}) — pull my squad from the official FPL API, run the full structured Weekly Review, and generate a Matchday Sheet visual for it.`;
+    bannerForm.hidden = true;
+    bannerResult.hidden = false;
+    bannerOutput.focus();
+    bannerOutput.select();
+  }
+
+  bannerGo.addEventListener("click", submitTeamId);
+  bannerInput.addEventListener("keydown", (e) => { if (e.key === "Enter") submitTeamId(); });
+
+  bannerCopy.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(bannerOutput.value);
+      bannerCopy.textContent = "Copied!";
+    } catch {
+      bannerOutput.select();
+      bannerCopy.textContent = "Select & Ctrl+C";
+    }
+    setTimeout(() => { bannerCopy.textContent = "Copy"; }, 2000);
   });
 </script>
