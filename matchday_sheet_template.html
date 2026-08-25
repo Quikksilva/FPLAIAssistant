@@ -229,8 +229,30 @@
     text-align: center;
     box-shadow: var(--shadow);
     border-top: 3px solid var(--club);
+    border-bottom: 3px solid transparent;
     width: 92px;
     flex: 0 0 auto;
+  }
+
+  .card.fit-concern {
+    border-bottom-color: var(--fit-color);
+  }
+
+  .fit-flag {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--fit-color);
+    margin: -1px 0 4px;
+  }
+
+  .bench-fit-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--fit-color);
+    flex-shrink: 0;
   }
 
   .card .badge-row {
@@ -762,6 +784,7 @@
       <span class="price" id="modal-price" style="margin-bottom:0;"></span>
       <span class="modal-verdict-pill" id="modal-verdict-pill"></span>
       <span class="pts-badge" id="modal-pts" style="position:static;"></span>
+      <span class="modal-verdict-pill" id="modal-fitness-pill" hidden></span>
     </div>
     <p class="modal-blurb" id="modal-blurb"></p>
   </div>
@@ -779,6 +802,15 @@
     HOLD:  { color: "var(--hold)", label: "Hold" },
     SELL_SOFT: { color: "var(--sell-soft)", label: "Sell if possible" },
     SELL:  { color: "var(--sell)", label: "Sell" }
+  };
+
+  // Fitness/availability status - separate from the verdict above. A player
+  // can be a KEEP verdict and still be doubtful/injured for the next match.
+  // Omit the `fitness` field entirely on a player object when fully fit -
+  // that's the common case and shouldn't add visual noise.
+  const FITNESS = {
+    doubtful: { color: "var(--sell-soft)", label: "Doubtful" },
+    out:      { color: "var(--sell)", label: "Injured/Unavailable" }
   };
 
   const XI = {
@@ -839,8 +871,12 @@
         ? '<span class="pin vc">V</span>'
         : "";
     const ptsBadge = typeof p.pts === "number" ? `<span class="pts-badge">${p.pts}</span>` : "";
+    const fit = p.fitness ? FITNESS[p.fitness] : null;
+    const cardClass = fit ? "card fit-concern" : "card";
+    const cardStyle = fit ? `--club:${club}; --fit-color:${fit.color}` : `--club:${club}`;
+    const fitFlag = fit ? `<div class="fit-flag">${fit.label}</div>` : "";
     return `
-      <div class="card" style="--club:${club}" data-id="${p.id}" tabindex="0" role="button" aria-haspopup="dialog">
+      <div class="${cardClass}" style="${cardStyle}" data-id="${p.id}" tabindex="0" role="button" aria-haspopup="dialog">
         <div class="badge-row">${pin}</div>
         <div class="card-top">
           <span class="club-code">${p.club}</span>
@@ -848,6 +884,7 @@
         </div>
         <div class="name">${p.name}</div>
         <div class="price">£${p.price}m</div>
+        ${fitFlag}
         <div class="dot-row">
           <span class="dot" style="--v-color:${v.color}"></span>
           <span class="dot-label" style="--v-color:${v.color}">${v.label}</span>
@@ -858,9 +895,12 @@
   function benchHTML(p, i) {
     const v = VERDICT[p.verdict];
     const club = CLUB_COLOR[p.club] || "#8a8f6b";
+    const fit = p.fitness ? FITNESS[p.fitness] : null;
+    const fitDot = fit ? `<span class="bench-fit-dot" style="--fit-color:${fit.color}" title="${fit.label}"></span>` : "";
     return `
       <div class="bench-card" style="--club:${club}" data-id="${p.id}" tabindex="0" role="button" aria-haspopup="dialog">
         <span class="bench-num">${i + 1}</span>
+        ${fitDot}
         <div class="bench-info">
           <div class="bench-name">${p.name} <span style="color:var(--ink-soft); font-weight:500;">(${p.club})</span></div>
           <div class="bench-meta">
@@ -878,9 +918,18 @@
   document.getElementById("row-gk").insertAdjacentHTML("beforeend", XI.gk.map(cardHTML).join(""));
   document.getElementById("bench-row").innerHTML = BENCH.map(benchHTML).join("");
 
-  document.getElementById("legend").innerHTML = Object.values(VERDICT).map(v =>
+  const ALL_PLAYERS = [...XI.fwd, ...XI.mid, ...XI.def, ...XI.gk, ...BENCH];
+  const hasFitnessFlags = ALL_PLAYERS.some(p => p.fitness);
+
+  let legendHTML = Object.values(VERDICT).map(v =>
     `<span class="legend-item"><span class="dot" style="--v-color:${v.color}"></span>${v.label}</span>`
   ).join("");
+  if (hasFitnessFlags) {
+    legendHTML += Object.values(FITNESS).map(f =>
+      `<span class="legend-item"><span class="dot" style="--v-color:${f.color}"></span>${f.label} (fitness)</span>`
+    ).join("");
+  }
+  document.getElementById("legend").innerHTML = legendHTML;
 
   // --- Player detail modal ---------------------------------------------
   const backdrop = document.getElementById("modal-backdrop");
@@ -902,6 +951,16 @@
     verdictPill.style.setProperty("--v-color", v.color);
     document.getElementById("modal-blurb").textContent = p.blurb || "No detail available for this player yet.";
     document.getElementById("modal-pts").textContent = typeof p.pts === "number" ? p.pts + " pts (GW1)" : "";
+
+    const fitnessPill = document.getElementById("modal-fitness-pill");
+    const fit = p.fitness ? FITNESS[p.fitness] : null;
+    if (fit) {
+      fitnessPill.hidden = false;
+      fitnessPill.textContent = fit.label;
+      fitnessPill.style.setProperty("--v-color", fit.color);
+    } else {
+      fitnessPill.hidden = true;
+    }
 
     const pinEl = document.getElementById("modal-pin");
     if (p.tag === "C") { pinEl.hidden = false; pinEl.textContent = "Captain"; pinEl.className = "pin"; }

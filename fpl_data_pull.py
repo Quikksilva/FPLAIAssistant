@@ -458,6 +458,7 @@ def pull_manager_data(team_id, current_event_id):
             "current_price": money(el.get("now_cost")),
             "purchase_price": money(pick.get("purchase_price")) if "purchase_price" in pick else "",
             "status": el.get("status"),
+            "chance_of_playing_next_round": el.get("chance_of_playing_next_round"),
             "news": el.get("news", ""),
         })
     squad_rows.sort(key=lambda r: r["squad_slot"])
@@ -466,7 +467,8 @@ def pull_manager_data(team_id, current_event_id):
         os.path.join(OUT_DIR, "squad_current.csv"),
         ["web_name", "team_short", "position", "squad_slot", "is_starting",
          "is_captain", "is_vice_captain", "multiplier", "gw_points_raw",
-         "gw_points_scored", "current_price", "purchase_price", "status", "news"],
+         "gw_points_scored", "current_price", "purchase_price", "status",
+         "chance_of_playing_next_round", "news"],
         squad_rows,
     )
     print(f"Wrote squad_current.csv (GW{picks_event} picks, {len(squad_rows)} players, "
