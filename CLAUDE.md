@@ -271,3 +271,17 @@ Matchday Sheet artifact has a "Not you? Get your own review" banner that only ge
 ready-to-paste chat prompt — it does not fetch data or call an LLM on its own. Don't build actual
 public/automated multi-tenant infrastructure for this without Trent explicitly re-opening that
 conversation, since it has real cost and abuse-exposure implications for his account.
+
+**Saved secondary squads** (added 25 Aug 2026): squads Trent wants to check ad hoc, in chat, on
+request — not part of the daily automation and not the default team for anything. Currently:
+
+- **James Forster** ("Jimmy's Battlers"), Team ID **5061820**. His own Matchday Sheet artifact:
+  https://claude.ai/code/artifact/e1876bb4-c552-4f42-8c4d-7bc7b5a1b812 (separate URL from Trent's —
+  never republish Trent's artifact URL with James's data or vice versa).
+
+When Trent asks to check "James's squad" (or similar), use this Team ID directly rather than
+asking him for it again. To refresh: `python fpl_data_pull.py 5061820`, then `git checkout --
+fpl_data/` afterward to restore Trent's own squad data locally before doing anything else (see the
+main data-pull section above — don't let another manager's pull get committed/pushed to the repo,
+since the daily automation and Trent's own artifact both depend on `fpl_data/` reflecting Trent's
+team, team ID 5919706).
