@@ -239,6 +239,29 @@
     right: -6px;
   }
 
+  .pts-badge {
+    position: absolute;
+    top: -8px;
+    left: -6px;
+    font-family: "Big Shoulders Display", ui-sans-serif, sans-serif;
+    font-weight: 800;
+    font-size: 12px;
+    line-height: 1;
+    padding: 3px 6px 2px;
+    border-radius: 20px;
+    color: var(--paper);
+    background: var(--ink);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+  }
+
+  .bench-pts {
+    font-family: "Big Shoulders Display", ui-sans-serif, sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    color: var(--ink);
+    flex-shrink: 0;
+  }
+
   .pin {
     font-family: "Big Shoulders Display", ui-sans-serif, sans-serif;
     font-weight: 800;
@@ -388,6 +411,64 @@
     font-size: 11px;
     color: var(--ink-soft);
   }
+
+  .transfer-panel {
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-top: 16px;
+  }
+
+  .transfer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+  }
+
+  .transfer-title {
+    font-family: "Big Shoulders Display", ui-sans-serif, sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  .transfer-call {
+    font-family: "Big Shoulders Display", ui-sans-serif, sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    padding: 3px 10px 2px;
+    border-radius: 20px;
+  }
+
+  .transfer-call.roll { background: var(--dugout-card); color: var(--ink); }
+  .transfer-call.make { background: var(--armband); color: var(--armband-ink); }
+
+  .transfer-body {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin: 8px 0 0;
+  }
+
+  .transfer-watch {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--panel-border);
+    font-size: 12.5px;
+    color: var(--ink-soft);
+  }
+
+  .transfer-watch strong { color: var(--ink); }
 
   @media (prefers-reduced-motion: no-preference) {
     .card, .bench-card { transition: transform 0.15s ease; }
@@ -620,6 +701,7 @@
   </div>
 
   <div class="stat-strip">
+    <div class="stat"><div class="label">GW1 points</div><div class="value">47</div></div>
     <div class="stat"><div class="label">Bank</div><div class="value">£0.0m</div></div>
     <div class="stat"><div class="label">Free transfers</div><div class="value">1</div></div>
     <div class="stat"><div class="label">Team value</div><div class="value">£100.0m</div></div>
@@ -639,9 +721,21 @@
     <div class="bench-row" id="bench-row"></div>
   </div>
 
-  <p class="tap-hint">Tap any player for the reasoning behind their verdict.</p>
+  <p class="tap-hint">Tap any player for the reasoning behind their verdict. Numbers on each card are GW1 points scored.</p>
 
   <div class="legend" id="legend"></div>
+
+  <div class="transfer-panel">
+    <div class="transfer-head">
+      <span class="transfer-title">Free transfer &mdash; GW2</span>
+      <span class="transfer-call roll" id="transfer-call">Roll</span>
+    </div>
+    <p class="transfer-body" id="transfer-body">No clean upgrade is actually affordable right now, so the free transfer rolls to 2 for next week rather than being spent for the sake of it.</p>
+    <div class="transfer-watch" id="transfer-watch">
+      <span>&#128064;</span>
+      <span>Watching: <strong>Ndiaye</strong> (Everton, £6.0m) as the upgrade target if Hughes blanks again &mdash; needs an extra £1.5m over his sale price, so a price rise or a second sale first.</span>
+    </div>
+  </div>
 
   <div class="footnote">Squad data pulled from the official FPL API &middot; verdicts from the weekly Claude review &middot; refreshes automatically each Gameweek.</div>
 </div>
@@ -657,6 +751,7 @@
     <div class="modal-meta">
       <span class="price" id="modal-price" style="margin-bottom:0;"></span>
       <span class="modal-verdict-pill" id="modal-verdict-pill"></span>
+      <span class="pts-badge" id="modal-pts" style="position:static;"></span>
     </div>
     <p class="modal-blurb" id="modal-blurb"></p>
   </div>
@@ -678,45 +773,45 @@
 
   const XI = {
     fwd: [
-      { name: "Haaland", club: "MCI", price: "15.5", verdict: "KEEP", tag: "C",
+      { name: "Haaland", club: "MCI", price: "15.5", verdict: "KEEP", tag: "C", pts: 4,
         blurb: "A quiet 2-point return in GW1 (4 with the armband) — no goal or assist, which is rare for him. One blank doesn't change the underlying case: still the #1 penalty taker and the highest-ceiling captain option in the game. Keep captaining him." },
-      { name: "João Pedro", club: "CHE", price: "7.5", verdict: "KEEP",
+      { name: "João Pedro", club: "CHE", price: "7.5", verdict: "KEEP", pts: 11,
         blurb: "11 points in GW1 — the best return in the squad. Chelsea's undisputed #9, delivering exactly what that role should. Tough fixture at Arsenal in GW3, but otherwise a clear keep." }
     ],
     mid: [
-      { name: "Semenyo", club: "MCI", price: "8.5", verdict: "KEEP",
+      { name: "Semenyo", club: "MCI", price: "8.5", verdict: "KEEP", pts: 2,
         blurb: "Played the full 90 minutes in his first City appearance of the season — the exact signal that was missing last week. Rotation risk was always the concern, not quality (17 combined PL goals last season), and a full 90 under Guardiola is a genuinely reassuring sign. Upgraded from Hold to Keep on that basis." },
-      { name: "B.Fernandes", club: "MUN", price: "12.0", verdict: "KEEP", tag: "V",
+      { name: "B.Fernandes", club: "MUN", price: "12.0", verdict: "KEEP", tag: "V", pts: 2,
         blurb: "Quiet 2-point start, but still Man Utd's #1 penalty taker and their best chance creator (0.26 xA in GW1). One of the most reliable vice-captain picks in the game outside of Haaland himself." },
-      { name: "Tzolis", club: "ARS", price: "6.5", verdict: "KEEP",
+      { name: "Tzolis", club: "ARS", price: "6.5", verdict: "KEEP", pts: 6,
         blurb: "6 points in GW1 with strong underlying numbers (0.19 xG, 0.14 xA in 75 minutes) — outperforming much pricier Arsenal teammates while still only 25% owned. The best differential in the squad right now." },
-      { name: "Slater", club: "HUL", price: "4.5", verdict: "KEEP",
+      { name: "Slater", club: "HUL", price: "4.5", verdict: "KEEP", pts: 6,
         blurb: "6 points in GW1 (0.44 xA) at just £4.5m — better underlying output than Hughes at a similar price. Ready-made free cover, started ahead of Hughes in this week's XI without costing a transfer." }
     ],
     def: [
-      { name: "Maguire", club: "MUN", price: "5.0", verdict: "HOLD",
+      { name: "Maguire", club: "MUN", price: "5.0", verdict: "HOLD", pts: 1,
         blurb: "1 point from GW1, but the underlying numbers were fine (0.40 xA). Man Utd's defense is historically inconsistent and the fixtures ahead are mixed. He's your 4th defender, not a player to build around — comfortable to hold, not worth a transfer." },
-      { name: "Gabriel", club: "ARS", price: "8.0", verdict: "KEEP",
+      { name: "Gabriel", club: "ARS", price: "8.0", verdict: "KEEP", pts: 5,
         blurb: "5 points in GW1 — a clean sheet plus real attacking threat. One of the best defensive assets in the game: set-piece involvement, goal threat, and Arsenal's defense is elite. Clear keep." },
-      { name: "Thomas", club: "COV", price: "4.0", verdict: "KEEP",
+      { name: "Thomas", club: "COV", price: "4.0", verdict: "KEEP", pts: 3,
         blurb: "3 points in GW1 as a budget enabler, and already hit the new DEFCON threshold (10 combined clearances/blocks/interceptions/tackles) for the bonus 2 points. Doing exactly the job a £4.0m defender should." },
-      { name: "Pedro Porro", club: "TOT", price: "5.5", verdict: "KEEP",
+      { name: "Pedro Porro", club: "TOT", price: "5.5", verdict: "KEEP", pts: 0,
         blurb: "Officially available again — status flipped from Injured to clean with no news flag. Reporting is mixed on whether he's immediately nailed (some say confirmed to start, others describe a carefully managed return from his World Cup layoff), but he's cleared to play and the attacking full-back upside is worth the swap back in. Re-check Spurs' team news nearer the deadline in case he's eased in from the bench instead." }
     ],
     gk: [
-      { name: "Raya", club: "ARS", price: "6.0", verdict: "KEEP",
+      { name: "Raya", club: "ARS", price: "6.0", verdict: "KEEP", pts: 6,
         blurb: "Kept a clean sheet for 6 points in GW1. Arsenal's defense is among the best in the league and he's the highest-owned keeper for good reason — no changes needed here." }
     ]
   };
 
   const BENCH = [
-    { name: "Forster", club: "BOU", pos: "GK", verdict: "KEEP", note: "Cover",
+    { name: "Forster", club: "BOU", pos: "GK", verdict: "KEEP", note: "Cover", pts: 0,
       blurb: "Pure bench-fodder goalkeeper at £4.0m behind Raya — doing exactly the job it's priced to do. No changes needed." },
-    { name: "van Ewijk", club: "COV", pos: "DEF", verdict: "KEEP", note: "1pt, safe fallback",
+    { name: "van Ewijk", club: "COV", pos: "DEF", verdict: "KEEP", note: "1pt, safe fallback", pts: 1,
       blurb: "Played 90 minutes and returned 1 point as Porro's stand-in for GW1 — job done. Now the bench option again with Porro back available, but ready to step back in for free if Porro doesn't get minutes." },
-    { name: "Hughes", club: "CRY", pos: "MID", verdict: "HOLD", note: "0 mins GW1",
+    { name: "Hughes", club: "CRY", pos: "MID", verdict: "HOLD", note: "0 mins GW1", pts: 0,
       blurb: "Played 0 minutes in GW1 despite being fit — Wharton, Kamada and McNeil were preferred in Palace's midfield. No analyst coverage suggests an actual demotion (he was a vice-captain last season), so this could be squad rotation for a European fixture rather than a lasting change. One more benching next week would be the real signal — Ndiaye at Everton is the top upgrade target if so." },
-    { name: "Kusi-Asare", club: "FUL", pos: "FWD", verdict: "HOLD", note: "Enabler",
+    { name: "Kusi-Asare", club: "FUL", pos: "FWD", verdict: "HOLD", note: "Enabler", pts: 0,
       blurb: "Cheap enabler at Fulham with no real minutes expectation. Pure budget filler to hit £100m, nothing more expected of him." }
   ];
 
@@ -733,8 +828,10 @@
       : p.tag === "V"
         ? '<span class="pin vc">V</span>'
         : "";
+    const ptsBadge = typeof p.pts === "number" ? `<span class="pts-badge">${p.pts}</span>` : "";
     return `
       <div class="card" style="--club:${club}" data-id="${p.id}" tabindex="0" role="button" aria-haspopup="dialog">
+        ${ptsBadge}
         <div class="badge-row">${pin}</div>
         <div class="club-code">${p.club}</div>
         <div class="name">${p.name}</div>
@@ -759,6 +856,7 @@
             <span>${p.pos} &middot; ${p.note}</span>
           </div>
         </div>
+        ${typeof p.pts === "number" ? `<span class="bench-pts">${p.pts}</span>` : ""}
       </div>`;
   }
 
@@ -791,6 +889,7 @@
     verdictPill.textContent = v.label;
     verdictPill.style.setProperty("--v-color", v.color);
     document.getElementById("modal-blurb").textContent = p.blurb || "No detail available for this player yet.";
+    document.getElementById("modal-pts").textContent = typeof p.pts === "number" ? p.pts + " pts (GW1)" : "";
 
     const pinEl = document.getElementById("modal-pin");
     if (p.tag === "C") { pinEl.hidden = false; pinEl.textContent = "Captain"; pinEl.className = "pin"; }
