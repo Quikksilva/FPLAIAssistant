@@ -201,23 +201,24 @@
   }
 
   .row {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(78px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 8px;
-    padding: 10px 6px;
+    padding: 24px 6px 10px;
     position: relative;
   }
 
   .row-label {
     position: absolute;
-    left: 4px;
-    top: 4px;
+    left: 6px;
+    top: 6px;
     font-family: "Big Shoulders Display", ui-sans-serif, sans-serif;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.12em;
     color: var(--turf-line);
-    opacity: 0.8;
+    opacity: 0.85;
   }
 
   .card {
@@ -228,6 +229,8 @@
     text-align: center;
     box-shadow: var(--shadow);
     border-top: 3px solid var(--club);
+    width: 92px;
+    flex: 0 0 auto;
   }
 
   .card .badge-row {
@@ -348,8 +351,9 @@
   }
 
   .bench-row {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 8px;
   }
 
@@ -362,6 +366,8 @@
     gap: 9px;
     opacity: 0.92;
     border-left: 3px solid var(--club);
+    width: 152px;
+    flex: 0 0 auto;
   }
 
   .bench-num {
