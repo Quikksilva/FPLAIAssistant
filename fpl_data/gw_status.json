@@ -1,11 +1,11 @@
 {
   "current_event_id": 1,
   "current_event_name": "Gameweek 1",
-  "current_event_finished": false,
-  "current_event_data_checked": false,
-  "most_recently_finished_event_id": null,
-  "most_recently_finished_event_data_checked": null,
+  "current_event_finished": true,
+  "current_event_data_checked": true,
+  "most_recently_finished_event_id": 1,
+  "most_recently_finished_event_data_checked": true,
   "next_event_id": 2,
   "next_event_deadline": "2026-08-28T17:30:00Z",
-  "checked_at_utc": "2026-08-25T09:55:43.167479+00:00"
+  "checked_at_utc": "2026-08-25T21:29:02.628414+00:00"
 }

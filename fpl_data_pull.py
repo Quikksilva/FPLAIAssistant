@@ -388,6 +388,12 @@ def pull_manager_data(team_id, current_event_id):
 
     picks_data = fetch_json(f"/entry/{team_id}/event/{picks_event}/picks/") if picks_event else None
 
+    # Points scored in picks_event specifically (not season-cumulative) - the
+    # picks endpoint's entry_history.points field is exactly this, straight
+    # from the API, so no need to sum it ourselves.
+    gameweek_points = picks_data["entry_history"]["points"] if picks_data else ""
+    points_on_bench = picks_data["entry_history"]["points_on_bench"] if picks_data else ""
+
     summary_row = {
         "team_id": team_id,
         "manager_name": f"{entry.get('player_first_name', '')} {entry.get('player_last_name', '')}".strip(),
@@ -395,6 +401,8 @@ def pull_manager_data(team_id, current_event_id):
         "overall_rank": entry.get("summary_overall_rank", ""),
         "overall_points": entry.get("summary_overall_points", ""),
         "gameweek_reflected": picks_event,
+        "gameweek_points": gameweek_points,
+        "points_on_bench": points_on_bench,
         "team_value": money(picks_data["entry_history"]["value"]) if picks_data else "",
         "bank": money(picks_data["entry_history"]["bank"]) if picks_data else "",
         "free_transfers_available_next_gw": free_transfers,
@@ -420,10 +428,22 @@ def pull_manager_data(team_id, current_event_id):
     teams_by_id = {t["id"]: t for t in bootstrap["teams"]} if bootstrap else {}
     pos_lookup = build_position_lookup(bootstrap["element_types"]) if bootstrap else {}
 
+    # Per-player points for picks_event specifically, from the gameweek-live
+    # endpoint (not bootstrap's event_points field, which reflects whatever
+    # event is currently "live" and would go stale/reset once the next GW
+    # starts - this endpoint always returns that exact gameweek's stats).
+    live_data = fetch_json(f"/event/{picks_event}/live/")
+    live_points_by_element = {}
+    if live_data:
+        for el in live_data.get("elements", []):
+            live_points_by_element[el["id"]] = el.get("stats", {}).get("total_points", 0)
+
     squad_rows = []
     for pick in picks_data.get("picks", []):
         el = elements_by_id.get(pick["element"], {})
         team = teams_by_id.get(el.get("team"), {})
+        gw_pts_raw = live_points_by_element.get(pick["element"], 0)
+        multiplier = pick.get("multiplier", 1) or 0
         squad_rows.append({
             "web_name": el.get("web_name", ""),
             "team_short": team.get("short_name", ""),
@@ -432,7 +452,9 @@ def pull_manager_data(team_id, current_event_id):
             "is_starting": pick["position"] <= 11,
             "is_captain": pick.get("is_captain", False),
             "is_vice_captain": pick.get("is_vice_captain", False),
-            "multiplier": pick.get("multiplier"),
+            "multiplier": multiplier,
+            "gw_points_raw": gw_pts_raw,
+            "gw_points_scored": gw_pts_raw * multiplier,
             "current_price": money(el.get("now_cost")),
             "purchase_price": money(pick.get("purchase_price")) if "purchase_price" in pick else "",
             "status": el.get("status"),
@@ -443,11 +465,12 @@ def pull_manager_data(team_id, current_event_id):
     write_csv(
         os.path.join(OUT_DIR, "squad_current.csv"),
         ["web_name", "team_short", "position", "squad_slot", "is_starting",
-         "is_captain", "is_vice_captain", "multiplier", "current_price",
-         "purchase_price", "status", "news"],
+         "is_captain", "is_vice_captain", "multiplier", "gw_points_raw",
+         "gw_points_scored", "current_price", "purchase_price", "status", "news"],
         squad_rows,
     )
-    print(f"Wrote squad_current.csv (GW{picks_event} picks, {len(squad_rows)} players)")
+    print(f"Wrote squad_current.csv (GW{picks_event} picks, {len(squad_rows)} players, "
+          f"{gameweek_points} team points that GW)")
 
 
 def write_gw_status(events, fixtures):
