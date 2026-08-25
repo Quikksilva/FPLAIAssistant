@@ -239,19 +239,23 @@
     right: -6px;
   }
 
+  .card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px;
+    margin-bottom: 1px;
+  }
+
   .pts-badge {
-    position: absolute;
-    top: -8px;
-    left: -6px;
     font-family: "Big Shoulders Display", ui-sans-serif, sans-serif;
     font-weight: 800;
-    font-size: 12px;
+    font-size: 11px;
     line-height: 1;
-    padding: 3px 6px 2px;
+    padding: 2px 5px 1px;
     border-radius: 20px;
     color: var(--paper);
     background: var(--ink);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.25);
   }
 
   .bench-pts {
@@ -831,9 +835,11 @@
     const ptsBadge = typeof p.pts === "number" ? `<span class="pts-badge">${p.pts}</span>` : "";
     return `
       <div class="card" style="--club:${club}" data-id="${p.id}" tabindex="0" role="button" aria-haspopup="dialog">
-        ${ptsBadge}
         <div class="badge-row">${pin}</div>
-        <div class="club-code">${p.club}</div>
+        <div class="card-top">
+          <span class="club-code">${p.club}</span>
+          ${ptsBadge}
+        </div>
         <div class="name">${p.name}</div>
         <div class="price">£${p.price}m</div>
         <div class="dot-row">
