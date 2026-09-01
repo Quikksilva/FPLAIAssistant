@@ -1,7 +1,7 @@
 web_name,team_short,position,squad_slot,is_starting,is_captain,is_vice_captain,multiplier,gw_points_raw,gw_points_scored,current_price,purchase_price,status,chance_of_playing_next_round,news
-Raya,ARS,GKP,1,True,False,False,1,0,0,6.0,,a,,
+Raya,ARS,GKP,1,True,False,False,1,6,6,6.0,,a,,
 Maguire,MUN,DEF,2,True,False,False,1,4,4,5.0,,a,,
-Gabriel,ARS,DEF,3,True,False,False,1,0,0,8.0,,a,,
+Gabriel,ARS,DEF,3,True,False,False,1,8,8,8.0,,a,,
 Pedro Porro,TOT,DEF,4,True,False,False,1,1,1,5.5,,a,100,
 Slater,HUL,MID,5,True,False,False,1,2,2,4.5,,a,,
 Semenyo,MCI,MID,6,True,False,False,1,5,5,8.5,,a,,
