@@ -1,24 +1,21 @@
 id,web_name,team_short,old_price,new_price,change
-27,G.Jesus,ARS,6.0,5.9,-0.1
-55,Watkins,AVL,7.9,7.8,-0.1
-85,Van den Berg,BRE,5.0,4.9,-0.1
-140,Sánchez,CHE,5.0,4.9,-0.1
-578,Mudryk,CHE,5.5,5.4,-0.1
-218,Doucouré,CRY,5.0,4.9,-0.1
-223,Mateta,CRY,6.5,6.4,-0.1
-209,Johnson,EVE,6.0,5.9,-0.1
-345,Tanaka,LEE,5.0,4.9,-0.1
-369,Ngumoha,LIV,6.0,5.9,-0.1
-383,Elliott,LIV,5.5,5.4,-0.1
-410,Monga,MCI,5.0,4.9,-0.1
-420,Yoro,MUN,5.0,4.9,-0.1
-457,J.Murphy,NEW,6.0,5.9,-0.1
-458,Joelinton,NEW,5.5,5.4,-0.1
-463,Woltemade,NEW,6.0,5.9,-0.1
-484,Hutchinson,NFO,5.5,5.4,-0.1
-455,Tonali,TOT,5.5,5.4,-0.1
-526,Solanke,TOT,6.0,5.9,-0.1
-549,Talbi,SUN,5.5,5.4,-0.1
-115,De Cuyper,BHA,4.6,4.7,0.1
-279,Ajayi,HUL,4.0,4.1,0.1
-399,Cherki,MCI,7.6,7.7,0.1
+18,Martinelli,ARS,6.4,6.3,-0.1
+25,Gyökeres,ARS,7.4,7.3,-0.1
+185,Sakamoto,COV,5.0,4.9,-0.1
+207,Mingueza,CRY,4.5,4.4,-0.1
+208,Sarr,CRY,6.4,6.3,-0.1
+213,Lerma,CRY,5.0,4.9,-0.1
+21,Nørgaard,EVE,5.0,4.9,-0.1
+314,Ogbene,IPS,5.0,4.9,-0.1
+318,Philogene,IPS,5.5,5.4,-0.1
+324,Mehmeti,IPS,5.0,4.9,-0.1
+260,Wilson,LEE,6.5,6.4,-0.1
+579,Araujo,LIV,5.5,5.4,-0.1
+407,Echeverri,MCI,5.0,4.9,-0.1
+450,Livramento,NEW,5.0,4.9,-0.1
+491,Igor Jesus,NFO,6.0,5.9,-0.1
+498,Senesi,TOT,6.0,5.9,-0.1
+552,Brobbey,SUN,6.0,5.9,-0.1
+565,M.Sangaré,BRE,5.6,5.7,0.1
+165,João Pedro,CHE,7.6,7.7,0.1
+449,Hall,NEW,5.0,5.1,0.1
