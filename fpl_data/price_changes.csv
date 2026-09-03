@@ -1,21 +1,13 @@
 id,web_name,team_short,old_price,new_price,change
-18,Martinelli,ARS,6.4,6.3,-0.1
-25,Gyökeres,ARS,7.4,7.3,-0.1
-185,Sakamoto,COV,5.0,4.9,-0.1
-207,Mingueza,CRY,4.5,4.4,-0.1
-208,Sarr,CRY,6.4,6.3,-0.1
-213,Lerma,CRY,5.0,4.9,-0.1
-21,Nørgaard,EVE,5.0,4.9,-0.1
-314,Ogbene,IPS,5.0,4.9,-0.1
-318,Philogene,IPS,5.5,5.4,-0.1
-324,Mehmeti,IPS,5.0,4.9,-0.1
-260,Wilson,LEE,6.5,6.4,-0.1
-579,Araujo,LIV,5.5,5.4,-0.1
-407,Echeverri,MCI,5.0,4.9,-0.1
-450,Livramento,NEW,5.0,4.9,-0.1
-491,Igor Jesus,NFO,6.0,5.9,-0.1
-498,Senesi,TOT,6.0,5.9,-0.1
-552,Brobbey,SUN,6.0,5.9,-0.1
-565,M.Sangaré,BRE,5.6,5.7,0.1
-165,João Pedro,CHE,7.6,7.7,0.1
-449,Hall,NEW,5.0,5.1,0.1
+452,Bruno G.,ARS,6.9,6.8,-0.1
+44,Bailey,AVL,5.5,5.4,-0.1
+203,Canvot,CRY,5.0,4.9,-0.1
+263,Kevin,FUL,5.5,5.4,-0.1
+351,Mamardashvili,LIV,5.0,4.9,-0.1
+43,Tielemans,MUN,6.0,5.9,-0.1
+162,Andrey Santos,MUN,5.0,4.9,-0.1
+431,Amad,MUN,5.9,5.8,-0.1
+465,Osula,NEW,6.0,5.9,-0.1
+488,I.Sangaré,NFO,5.0,4.9,-0.1
+112,Van Hecke,TOT,5.0,4.9,-0.1
+572,Tzolakis,HUL,4.5,4.6,0.1
