@@ -724,21 +724,21 @@
 
   <div class="masthead">
     <span class="kicker">Trent Ellis &middot; Matchday Sheet</span>
-    <span class="gw">GW2</span>
+    <span class="gw">GW4</span>
   </div>
-  <h1>Best XI for the weekend</h1>
+  <h1>Triple Captain banked &mdash; now fix the XI</h1>
   <div class="verdict-row">
     <span class="rating">7/10</span>
-    <span class="verdict-text">GW1 done: 47 points, led by João Pedro's 11. Porro's back and available again &mdash; swap him in for van Ewijk. Semenyo played the full 90, resolving last week's biggest worry.</span>
+    <span class="verdict-text">GW3 done: 40 points, Triple Captain on Haaland tripling a 9-point haul to 27. Kusi-Asare's third straight blank at zero minutes is the real issue &mdash; fixed with a free lineup change, not a transfer.</span>
   </div>
 
   <div class="stat-strip">
-    <div class="stat"><div class="label">GW1 points</div><div class="value">47</div></div>
-    <div class="stat"><div class="label">Bank</div><div class="value">£0.0m</div></div>
-    <div class="stat"><div class="label">Free transfers</div><div class="value">1</div></div>
-    <div class="stat"><div class="label">Team value</div><div class="value">£100.0m</div></div>
-    <div class="stat"><div class="label">Chips used</div><div class="value">None</div></div>
-    <div class="stat"><div class="label">Overall rank</div><div class="value">5,273,665</div></div>
+    <div class="stat"><div class="label">GW3 points</div><div class="value">40</div></div>
+    <div class="stat"><div class="label">Bank</div><div class="value">£0.2m</div></div>
+    <div class="stat"><div class="label">Free transfers</div><div class="value">3</div></div>
+    <div class="stat"><div class="label">Team value</div><div class="value">£100.1m</div></div>
+    <div class="stat"><div class="label">Chips used</div><div class="value">Triple Captain (GW3)</div></div>
+    <div class="stat"><div class="label">Overall rank</div><div class="value">3,975,409</div></div>
   </div>
 
   <div class="pitch">
@@ -753,19 +753,19 @@
     <div class="bench-row" id="bench-row"></div>
   </div>
 
-  <p class="tap-hint">Tap any player for the reasoning behind their verdict. Numbers on each card are GW1 points scored.</p>
+  <p class="tap-hint">Tap any player for the reasoning behind their verdict. Numbers on each card are GW3 points scored.</p>
 
   <div class="legend" id="legend"></div>
 
   <div class="transfer-panel">
     <div class="transfer-head">
-      <span class="transfer-title">Free transfer &mdash; GW2</span>
+      <span class="transfer-title">Free transfers &mdash; GW4</span>
       <span class="transfer-call roll" id="transfer-call">Roll</span>
     </div>
-    <p class="transfer-body" id="transfer-body">No clean upgrade is actually affordable right now, so the free transfer rolls to 2 for next week rather than being spent for the sake of it.</p>
+    <p class="transfer-body" id="transfer-body">No forward at Kusi-Asare's price offers a real upgrade &mdash; the whole sub-£5.5m striker pool (McBurnie, Isidor, Emersonn) is unproven or minutes-insecure right now. The actual fix costs zero transfers: start Thomas over Kusi-Asare (4-4-2) for a nailed defensive-contribution floor against a beatable Brighton side at home. Bank all 3 free transfers into GW5 rather than force a move for the sake of it.</p>
     <div class="transfer-watch" id="transfer-watch">
       <span>&#128064;</span>
-      <span>Watching: <strong>Ndiaye</strong> (Everton, £6.0m) as the upgrade target if Hughes blanks again &mdash; needs an extra £1.5m over his sale price, so a price rise or a second sale first.</span>
+      <span>Watching: <strong>McBurnie</strong> (Hull, £5.5m) &mdash; nailed 3/3 starts, needs an extra £0.8m over Kusi-Asare's sale price. Only worth it once his modest underlying (0.54 xG) actually picks up.</span>
     </div>
   </div>
 
@@ -794,7 +794,7 @@
   const CLUB_COLOR = {
     ARS: "#EF0107", MUN: "#DA291C", COV: "#6CACE4", TOT: "#132257",
     CRY: "#C4122E", MCI: "#6CABDD", CHE: "#034694", BOU: "#DA291C",
-    HUL: "#F5A100", FUL: "#1E1E1E"
+    HUL: "#F5A100", FUL: "#1E1E1E", LEE: "#1D428A"
   };
 
   const VERDICT = {
@@ -815,46 +815,46 @@
 
   const XI = {
     fwd: [
-      { name: "Haaland", club: "MCI", price: "15.5", verdict: "KEEP", tag: "C", pts: 4,
-        blurb: "A quiet 2-point return in GW1 (4 with the armband) — no goal or assist, which is rare for him. One blank doesn't change the underlying case: still the #1 penalty taker and the highest-ceiling captain option in the game. Keep captaining him." },
-      { name: "João Pedro", club: "CHE", price: "7.5", verdict: "KEEP", pts: 11,
-        blurb: "11 points in GW1 — the best return in the squad. Chelsea's undisputed #9, delivering exactly what that role should. Tough fixture at Arsenal in GW3, but otherwise a clear keep." }
+      { name: "Haaland", club: "MCI", price: "15.5", verdict: "KEEP", tag: "C", pts: 27,
+        blurb: "Triple Captained in GW3 and delivered — a 9-point haul tripled to 27, comfortably the difference in a 40-point week. Still the #1 penalty taker in the game with elite underlying output (0.82 xG/game across the first 3 rounds) even before that haul. GW4 is a tougher trip to Old Trafford without the multiplier this time, but he's still the clear captain again." },
+      { name: "Calvert-Lewin", club: "LEE", price: "6.0", verdict: "KEEP", pts: 1,
+        blurb: "Blanked for a single point in GW3 despite decent underlying numbers — 1.61 xG through 3 games is over half a goal a match, so the process is there even if the finishing hasn't clicked yet. Nailed as Leeds' focal point (252 of a possible 270 minutes) with a kind home fixture against Newcastle (FDR 2) up next. Keep — this reads as a form blip, not a role problem." }
     ],
     mid: [
-      { name: "Semenyo", club: "MCI", price: "8.5", verdict: "KEEP", pts: 2,
-        blurb: "Played the full 90 minutes in his first City appearance of the season — the exact signal that was missing last week. Rotation risk was always the concern, not quality (17 combined PL goals last season), and a full 90 under Guardiola is a genuinely reassuring sign. Upgraded from Hold to Keep on that basis." },
+      { name: "Slater", club: "HUL", price: "4.5", verdict: "KEEP", pts: 3,
+        blurb: "Cheap enabler doing exactly what's needed: 270/270 minutes, 2nd in Hull's corner-taking order, and 0.46 xA already on the underlying sheet. A tough trip to Chelsea in GW4 (FDR 4) means don't expect fireworks, but at £4.5m this is textbook budget management. Keep." },
+      { name: "Semenyo", club: "MCI", price: "8.4", verdict: "KEEP", pts: 6,
+        blurb: "6 points in GW3, backed by genuinely elite creative underlying numbers — 0.93 xA already this season for a midfielder at this price. Nailed his minutes across all 3 rounds and shares in City's penalty duty. Old Trafford in GW4 is the kind of derby that can swing either way, but the case to keep starting him stays strong." },
       { name: "B.Fernandes", club: "MUN", price: "12.0", verdict: "KEEP", tag: "V", pts: 2,
-        blurb: "Quiet 2-point start, but still Man Utd's #1 penalty taker and their best chance creator (0.26 xA in GW1). One of the most reliable vice-captain picks in the game outside of Haaland himself." },
-      { name: "Tzolis", club: "ARS", price: "6.5", verdict: "KEEP", pts: 6,
-        blurb: "6 points in GW1 with strong underlying numbers (0.19 xG, 0.14 xA in 75 minutes) — outperforming much pricier Arsenal teammates while still only 25% owned. The best differential in the squad right now." },
-      { name: "Slater", club: "HUL", price: "4.5", verdict: "KEEP", pts: 6,
-        blurb: "6 points in GW1 (0.44 xA) at just £4.5m — better underlying output than Hughes at a similar price. Ready-made free cover, started ahead of Hughes in this week's XI without costing a transfer." }
+        blurb: "A quiet 2-point return in GW3 undersells a monster underlying week — 2.25 xG and 0.80 xA through 3 games is the best combined attacking output in the squad. Still Man Utd's sole man on penalties, corners and free-kicks. Man City away in GW4 is a step up in class, but he's shown he can produce against anyone — comfortable vice-captain again." },
+      { name: "Cherki", club: "MCI", price: "7.8", verdict: "KEEP", pts: 3,
+        blurb: "8.3 form and 1.35 xA in just 3 games (2 of them starts) is a special early rate of return, and Doku's calf injury only strengthens his case for regular minutes from here. The one thing to watch: he hasn't started every match yet, so re-check City's XI news before each deadline until he's fully undroppable. For now, keep." }
     ],
     def: [
-      { name: "Maguire", club: "MUN", price: "5.0", verdict: "HOLD", pts: 1,
-        blurb: "1 point from GW1, but the underlying numbers were fine (0.40 xA). Man Utd's defense is historically inconsistent and the fixtures ahead are mixed. He's your 4th defender, not a player to build around — comfortable to hold, not worth a transfer." },
-      { name: "Gabriel", club: "ARS", price: "8.0", verdict: "KEEP", pts: 5,
-        blurb: "5 points in GW1 — a clean sheet plus real attacking threat. One of the best defensive assets in the game: set-piece involvement, goal threat, and Arsenal's defense is elite. Clear keep." },
-      { name: "Thomas", club: "COV", price: "4.0", verdict: "KEEP", pts: 3,
-        blurb: "3 points in GW1 as a budget enabler, and already hit the new DEFCON threshold (10 combined clearances/blocks/interceptions/tackles) for the bonus 2 points. Doing exactly the job a £4.0m defender should." },
-      { name: "Pedro Porro", club: "TOT", price: "5.5", verdict: "KEEP", pts: 0,
-        blurb: "Officially available again — status flipped from Injured to clean with no news flag. Reporting is mixed on whether he's immediately nailed (some say confirmed to start, others describe a carefully managed return from his World Cup layoff), but he's cleared to play and the attacking full-back upside is worth the swap back in. Re-check Spurs' team news nearer the deadline in case he's eased in from the bench instead." }
+      { name: "Maguire", club: "MUN", price: "5.0", verdict: "HOLD", pts: 2,
+        blurb: "Steady if unspectacular — nailed his minutes again (270/270) but modest underlying output (0.07 xG, 0.42 xA combined across 3 games). De Ligt is still a long way from full match fitness, so there's no immediate threat to his starting spot. He's the 4th defender in this squad, not a player to build around — hold, not a transfer priority." },
+      { name: "Gabriel", club: "ARS", price: "8.0", verdict: "KEEP", pts: 2,
+        blurb: "Arsenal's defense remains one of the best in the league — 2 clean sheets in 3 games, 6 goals scored at the other end — and Gabriel adds real attacking upside on top of that platform (0.49 xG). Away at Sunderland in GW4 is a good fixture to keep that run going. Clear keep." },
+      { name: "Calafiori", club: "ARS", price: "5.7", verdict: "KEEP", pts: 2,
+        blurb: "The standout performer in this squad outside the front two: 7.3 form, 0.54 xG and 0.58 xA already this season from left-back — genuinely explosive underlying output for a £5.7m defender. He carries an injury history from last season worth watching, but he's played every available minute so far (236/270) and is fully fit for GW4. Keep, arguably undervalued at this price." },
+      { name: "Thomas", club: "COV", price: "4.0", verdict: "KEEP", pts: 0,
+        blurb: "Nailed all 3 Coventry starts (257/270 minutes) and already averaging over the new DEFCON threshold (10.86 combined actions per 90) — a reliable 2-point floor most weeks even without goal threat. Promoted into the starting XI this week in place of the non-playing Kusi-Asare, with a friendly home fixture against Brighton (FDR 2) to boot. This swap costs zero transfers — it's a lineup change only." }
     ],
     gk: [
-      { name: "Raya", club: "ARS", price: "6.0", verdict: "KEEP", pts: 6,
-        blurb: "Kept a clean sheet for 6 points in GW1. Arsenal's defense is among the best in the league and he's the highest-owned keeper for good reason — no changes needed here." }
+      { name: "Raya", club: "ARS", price: "6.0", verdict: "KEEP", pts: 3,
+        blurb: "3 points in GW3 behind that same strong Arsenal defense. No changes needed — remains one of the safest, highest-floor picks at the position." }
     ]
   };
 
   const BENCH = [
     { name: "Forster", club: "BOU", pos: "GK", verdict: "KEEP", note: "Cover", pts: 0,
       blurb: "Pure bench-fodder goalkeeper at £4.0m behind Raya — doing exactly the job it's priced to do. No changes needed." },
-    { name: "van Ewijk", club: "COV", pos: "DEF", verdict: "KEEP", note: "1pt, safe fallback", pts: 1,
-      blurb: "Played 90 minutes and returned 1 point as Porro's stand-in for GW1 — job done. Now the bench option again with Porro back available, but ready to step back in for free if Porro doesn't get minutes." },
-    { name: "Hughes", club: "CRY", pos: "MID", verdict: "HOLD", note: "0 mins GW1", pts: 0,
-      blurb: "Played 0 minutes in GW1 despite being fit — Wharton, Kamada and McNeil were preferred in Palace's midfield. No analyst coverage suggests an actual demotion (he was a vice-captain last season), so this could be squad rotation for a European fixture rather than a lasting change. One more benching next week would be the real signal — Ndiaye at Everton is the top upgrade target if so." },
-    { name: "Kusi-Asare", club: "FUL", pos: "FWD", verdict: "HOLD", note: "Enabler", pts: 0,
-      blurb: "Cheap enabler at Fulham with no real minutes expectation. Pure budget filler to hit £100m, nothing more expected of him." }
+    { name: "van Ewijk", club: "COV", pos: "DEF", verdict: "KEEP", note: "Nailed, safe cover", pts: 0,
+      blurb: "Nailed his minutes again (270/270) alongside Thomas in a Coventry defense that, despite the club's poor recent form (LLL), keeps generating solid defensive-contribution numbers (6.67 DC/90). Solid, cheap cover if needed." },
+    { name: "Hughes", club: "CRY", pos: "MID", verdict: "HOLD", note: "16 mins all season", pts: 0,
+      blurb: "Still barely featuring — just 16 minutes across the whole season, unused again in GW3. No specific injury news; this reads as squad rotation rather than a demotion, but it's the weakest spot in the squad. Not urgent to fix given the Kusi-Asare slot is the bigger priority, but worth monitoring." },
+    { name: "Kusi-Asare", club: "FUL", pos: "FWD", verdict: "SELL_SOFT", note: "0 mins, 3 GWs", pts: 0,
+      blurb: "Three gameweeks, zero minutes — the 19-year-old summer signing from Bayern Munich hasn't featured for Fulham's first team at all yet, despite an official 'available' status. He's cheap enough that he isn't costing much sitting on the bench, and there's no clearly better sub-£5m forward to replace him with right now (McBurnie, Isidor and Emersonn are all similarly unproven or minutes-insecure). Worth revisiting once he breaks into Fulham's matchday squad or a genuinely converting cheap striker option shows up elsewhere." }
   ];
 
   let uid = 0;
@@ -950,7 +950,7 @@
     verdictPill.textContent = v.label;
     verdictPill.style.setProperty("--v-color", v.color);
     document.getElementById("modal-blurb").textContent = p.blurb || "No detail available for this player yet.";
-    document.getElementById("modal-pts").textContent = typeof p.pts === "number" ? p.pts + " pts (GW1)" : "";
+    document.getElementById("modal-pts").textContent = typeof p.pts === "number" ? p.pts + " pts (GW3)" : "";
 
     const fitnessPill = document.getElementById("modal-fitness-pill");
     const fit = p.fitness ? FITNESS[p.fitness] : null;
