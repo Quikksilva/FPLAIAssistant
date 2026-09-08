@@ -1,26 +1,10 @@
 id,web_name,team_short,old_price,new_price,change
-11,Mosquera,ARS,5.5,5.4,-0.1
-20,Dowman,ARS,5.4,5.3,-0.1
-65,J.Araujo,BOU,4.5,4.4,-0.1
-67,Rayan,BOU,6.5,6.4,-0.1
-72,Gannon-Doak,BOU,5.0,4.9,-0.1
-106,Thiago,BRE,8.0,7.9,-0.1
-104,Onyeka,COV,5.0,4.9,-0.1
-575,Yirenkyi,COV,5.0,4.9,-0.1
-584,Hamer,COV,5.5,5.4,-0.1
-271,Muniz,FUL,5.5,5.4,-0.1
-347,Nmecha,LEE,5.5,5.4,-0.1
-358,Kerkez,LIV,5.5,5.4,-0.1
-364,Tsimikas,LIV,5.0,4.9,-0.1
-369,Ngumoha,LIV,5.9,5.8,-0.1
-372,Mac Allister,LIV,5.5,5.4,-0.1
-380,Ekitiké,LIV,7.5,7.4,-0.1
-481,Anderson,MCI,6.4,6.3,-0.1
-423,Shaw,MUN,4.5,4.4,-0.1
-442,Pope,NEW,5.0,4.9,-0.1
-532,Ballard,SUN,5.0,4.9,-0.1
-547,Mundle,SUN,5.0,4.9,-0.1
-548,Rigg,SUN,5.0,4.9,-0.1
-40,Rogers,CHE,7.5,7.6,0.1
-277,Egan,HUL,4.0,4.1,0.1
-367,Gakpo,LIV,7.1,7.2,0.1
+557,Tzolis,ARS,6.5,6.4,-0.1
+41,Buendía,AVL,6.0,5.9,-0.1
+310,Matusiwa,IPS,5.0,4.9,-0.1
+392,Aït-Nouri,MCI,5.4,5.3,-0.1
+415,Dorgu,MUN,5.9,5.8,-0.1
+418,Maguire,MUN,5.0,4.9,-0.1
+435,Lacey,MUN,5.0,4.9,-0.1
+115,De Cuyper,BHA,4.7,4.8,0.1
+379,Isak,LIV,9.0,9.1,0.1
