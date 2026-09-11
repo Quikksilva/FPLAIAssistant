@@ -1,7 +1,7 @@
 web_name,team_short,position,squad_slot,is_starting,is_captain,is_vice_captain,multiplier,gw_points_raw,gw_points_scored,current_price,purchase_price,status,chance_of_playing_next_round,news
 Raya,ARS,GKP,1,True,False,False,1,3,3,6.0,,a,,
 Gabriel,ARS,DEF,2,True,False,False,1,2,2,8.0,,a,,
-Calafiori,ARS,DEF,3,True,False,False,1,2,2,5.7,,a,,
+Calafiori,ARS,DEF,3,True,False,False,1,2,2,5.8,,a,,
 Maguire,MUN,DEF,4,True,False,False,1,2,2,4.9,,a,,
 Slater,HUL,MID,5,True,False,False,1,3,3,4.5,,a,,
 Semenyo,MCI,MID,6,True,False,False,1,6,6,8.4,,a,,
