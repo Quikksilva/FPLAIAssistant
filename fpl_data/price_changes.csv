@@ -1,24 +1,28 @@
 id,web_name,team_short,old_price,new_price,change
-14,Eze,ARS,6.4,6.3,-0.1
-17,Merino,ARS,5.9,5.8,-0.1
-97,Jensen,BRE,5.5,5.4,-0.1
-103,Dasilva,BRE,5.0,4.9,-0.1
-125,Georginio,BHA,5.5,5.4,-0.1
-560,Penders,CHE,4.5,4.4,-0.1
-243,Alcaraz,EVE,5.0,4.9,-0.1
-265,Berge,FUL,5.0,4.9,-0.1
-269,Sessegnon,FUL,4.5,4.4,-0.1
-300,Walton,IPS,4.5,4.4,-0.1
-313,Clarke,IPS,5.5,5.4,-0.1
-338,Ampadu,LEE,5.5,5.4,-0.1
-374,Endo,LIV,5.0,4.9,-0.1
-395,Lewis,MCI,4.5,4.4,-0.1
-502,Robertson,TOT,4.5,4.4,-0.1
-513,Xavi,TOT,6.0,5.9,-0.1
-524,Olusesi,TOT,4.5,4.4,-0.1
-542,E.Le Fée,SUN,5.9,5.8,-0.1
-552,Brobbey,SUN,5.9,5.8,-0.1
-31,Konsa,ARS,4.4,4.5,0.1
-279,Ajayi,HUL,4.1,4.2,0.1
-449,Hall,NEW,5.1,5.2,0.1
-454,Elanga,NEW,6.1,6.2,0.1
+19,Zubimendi,ARS,5.4,5.3,-0.1
+452,Bruno G.,ARS,6.8,6.7,-0.1
+48,Onana,AVL,5.0,4.9,-0.1
+160,Garnacho,AVL,5.9,5.8,-0.1
+582,Madjo,AVL,5.5,5.4,-0.1
+63,Milosavljević,BOU,5.0,4.9,-0.1
+105,Anthony,BRE,6.0,5.9,-0.1
+137,Tzimas,BHA,5.5,5.4,-0.1
+152,Palestra,CHE,5.4,5.3,-0.1
+157,Estêvão,CHE,6.4,6.3,-0.1
+184,Grimes,COV,5.0,4.9,-0.1
+208,Sarr,CRY,6.3,6.2,-0.1
+223,Mateta,CRY,6.4,6.3,-0.1
+231,Keane,EVE,4.9,4.8,-0.1
+263,Kevin,FUL,5.4,5.3,-0.1
+278,Hughes,HUL,4.0,3.9,-0.1
+336,Okafor,LEE,5.9,5.8,-0.1
+343,James,LEE,5.0,4.9,-0.1
+412,Lammens,MUN,5.0,4.9,-0.1
+482,Hudson-Odoi,NFO,5.9,5.8,-0.1
+490,Wood,NFO,5.9,5.8,-0.1
+491,Igor Jesus,NFO,5.9,5.8,-0.1
+498,Senesi,TOT,5.9,5.8,-0.1
+522,Gray,TOT,5.0,4.9,-0.1
+26,Havertz,ARS,7.5,7.6,0.1
+40,Rogers,CHE,7.6,7.7,0.1
+165,João Pedro,CHE,7.7,7.8,0.1
