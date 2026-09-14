@@ -1,28 +1,19 @@
 id,web_name,team_short,old_price,new_price,change
-19,Zubimendi,ARS,5.4,5.3,-0.1
-452,Bruno G.,ARS,6.8,6.7,-0.1
-48,Onana,AVL,5.0,4.9,-0.1
-160,Garnacho,AVL,5.9,5.8,-0.1
-582,Madjo,AVL,5.5,5.4,-0.1
-63,Milosavljević,BOU,5.0,4.9,-0.1
-105,Anthony,BRE,6.0,5.9,-0.1
-137,Tzimas,BHA,5.5,5.4,-0.1
-152,Palestra,CHE,5.4,5.3,-0.1
-157,Estêvão,CHE,6.4,6.3,-0.1
-184,Grimes,COV,5.0,4.9,-0.1
-208,Sarr,CRY,6.3,6.2,-0.1
-223,Mateta,CRY,6.4,6.3,-0.1
-231,Keane,EVE,4.9,4.8,-0.1
-263,Kevin,FUL,5.4,5.3,-0.1
-278,Hughes,HUL,4.0,3.9,-0.1
-336,Okafor,LEE,5.9,5.8,-0.1
-343,James,LEE,5.0,4.9,-0.1
-412,Lammens,MUN,5.0,4.9,-0.1
-482,Hudson-Odoi,NFO,5.9,5.8,-0.1
-490,Wood,NFO,5.9,5.8,-0.1
-491,Igor Jesus,NFO,5.9,5.8,-0.1
-498,Senesi,TOT,5.9,5.8,-0.1
-522,Gray,TOT,5.0,4.9,-0.1
-26,Havertz,ARS,7.5,7.6,0.1
-40,Rogers,CHE,7.6,7.7,0.1
-165,João Pedro,CHE,7.7,7.8,0.1
+573,Sanchez,BOU,4.5,4.4,-0.1
+89,Henry,BRE,4.5,4.4,-0.1
+123,Hinshelwood,BHA,6.0,5.9,-0.1
+164,Quenda,CHE,5.4,5.3,-0.1
+246,Röhl,EVE,5.0,4.9,-0.1
+270,Reed,FUL,4.5,4.4,-0.1
+570,Palacios,FUL,5.5,5.4,-0.1
+303,Kipré,IPS,4.0,3.9,-0.1
+359,Gomez,LIV,5.0,4.9,-0.1
+131,Baleba,MUN,5.0,4.9,-0.1
+162,Andrey Santos,MUN,4.9,4.8,-0.1
+478,Netz,NFO,4.5,4.4,-0.1
+529,Roefs,SUN,5.0,4.9,-0.1
+533,Mukiele,SUN,5.5,5.4,-0.1
+549,Talbi,SUN,5.4,5.3,-0.1
+68,Tavernier,BOU,6.0,6.1,0.1
+229,Tarkowski,EVE,6.0,6.1,0.1
+391,Gvardiol,MCI,5.6,5.7,0.1
