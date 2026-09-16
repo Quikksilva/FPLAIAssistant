@@ -1,11 +1,11 @@
 {
   "current_event_id": 4,
   "current_event_name": "Gameweek 4",
-  "current_event_finished": false,
-  "current_event_data_checked": false,
-  "most_recently_finished_event_id": 3,
+  "current_event_finished": true,
+  "current_event_data_checked": true,
+  "most_recently_finished_event_id": 4,
   "most_recently_finished_event_data_checked": true,
   "next_event_id": 5,
   "next_event_deadline": "2026-09-18T17:30:00Z",
-  "checked_at_utc": "2026-09-15T08:15:52.809609+00:00"
+  "checked_at_utc": "2026-09-16T08:14:41.171353+00:00"
 }
