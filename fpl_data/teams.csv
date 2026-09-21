@@ -1,21 +1,21 @@
 id,name,short_name,strength_overall,strength_attack_home,strength_attack_away,strength_defence_home,strength_defence_away,recent_form,recent_played,recent_wins,recent_draws,recent_losses,recent_goals_for,recent_goals_against,recent_clean_sheets
-1,Arsenal,ARS,,0,0,0,0,WWWW,4,4,0,0,8,1,3
-2,Aston Villa,AVL,,0,0,0,0,LLDL,4,0,1,3,1,7,1
-3,Bournemouth,BOU,,0,0,0,0,LDDD,4,0,3,1,6,7,0
-4,Brentford,BRE,,0,0,0,0,WDDD,4,1,3,0,7,4,1
-5,Brighton,BHA,,0,0,0,0,WLDW,4,2,1,1,13,5,2
-6,Chelsea,CHE,,0,0,0,0,WWLD,4,2,1,1,10,9,0
-7,Coventry City,COV,,0,0,0,0,LLLL,4,0,0,4,0,10,0
-8,Crystal Palace,CRY,,0,0,0,0,LLWL,4,1,0,3,6,11,0
-9,Everton,EVE,,0,0,0,0,WDDD,4,1,3,0,5,3,2
-10,Fulham,FUL,,0,0,0,0,LLLD,4,0,1,3,4,7,1
-11,Hull City,HUL,,0,0,0,0,WWDD,4,2,2,0,5,2,3
-12,Ipswich Town,IPS,,0,0,0,0,WLLW,4,2,0,2,7,10,0
-13,Leeds,LEE,,0,0,0,0,WDDW,4,2,2,0,7,3,1
-14,Liverpool,LIV,,0,0,0,0,DDWD,4,1,3,0,6,4,2
-15,Man City,MCI,,0,0,0,0,WWWW,4,4,0,0,8,2,2
-16,Man Utd,MUN,,0,0,0,0,LWDL,4,1,1,2,7,7,0
-17,Newcastle,NEW,,0,0,0,0,DWDL,4,1,2,1,7,8,1
-18,Nott'm Forest,NFO,,0,0,0,0,LDDW,4,1,2,1,4,4,1
-19,Spurs,TOT,,0,0,0,0,LLDD,4,0,2,2,0,5,2
-20,Sunderland,SUN,,0,0,0,0,LWDL,4,1,1,2,3,5,1
+1,Arsenal,ARS,,0,0,0,0,WWWWL,5,4,0,1,8,4,3
+2,Aston Villa,AVL,,0,0,0,0,LLDLW,5,1,1,3,4,9,1
+3,Bournemouth,BOU,,0,0,0,0,LDDDL,5,0,3,2,6,8,0
+4,Brentford,BRE,,0,0,0,0,WDDDW,5,2,3,0,10,4,2
+5,Brighton,BHA,,0,0,0,0,WLDWW,5,3,1,1,16,5,3
+6,Chelsea,CHE,,0,0,0,0,WWLDL,5,2,1,2,10,12,0
+7,Coventry City,COV,,0,0,0,0,LLLLW,5,1,0,4,1,10,1
+8,Crystal Palace,CRY,,0,0,0,0,LLWLD,5,1,1,3,6,11,1
+9,Everton,EVE,,0,0,0,0,WDDDW,5,2,3,0,6,3,3
+10,Fulham,FUL,,0,0,0,0,LLLDD,5,0,2,3,5,8,1
+11,Hull City,HUL,,0,0,0,0,WWDDL,5,2,2,1,6,4,3
+12,Ipswich Town,IPS,,0,0,0,0,WLLWL,5,2,0,3,7,11,0
+13,Leeds,LEE,,0,0,0,0,WDDWD,5,2,3,0,7,3,2
+14,Liverpool,LIV,,0,0,0,0,DDWDW,5,2,3,0,7,4,3
+15,Man City,MCI,,0,0,0,0,WWWWW,5,5,0,0,13,5,2
+16,Man Utd,MUN,,0,0,0,0,LWDLD,5,1,2,2,8,8,0
+17,Newcastle,NEW,,0,0,0,0,DWDLW,5,2,2,1,9,9,1
+18,Nott'm Forest,NFO,,0,0,0,0,LDDWL,5,1,2,2,4,5,1
+19,Spurs,TOT,,0,0,0,0,LLDDL,5,0,2,3,2,8,2
+20,Sunderland,SUN,,0,0,0,0,LWDLL,5,1,1,3,6,10,1
