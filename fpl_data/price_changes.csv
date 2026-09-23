@@ -1,16 +1,6 @@
 id,web_name,team_short,old_price,new_price,change
-35,Bogarde,AVL,5.0,4.9,-0.1
-61,Truffert,BOU,5.5,5.4,-0.1
-144,Gusto,CHE,5.0,4.9,-0.1
-165,João Pedro,CHE,7.8,7.7,-0.1
-186,Mason-Clark,COV,5.4,5.3,-0.1
-195,Simms,COV,5.0,4.9,-0.1
-213,Lerma,CRY,4.9,4.8,-0.1
-218,Doucouré,CRY,4.9,4.8,-0.1
-323,McAteer,IPS,4.5,4.4,-0.1
-387,O'Reilly,MCI,6.4,6.3,-0.1
-426,B.Fernandes,MUN,12.0,11.9,-0.1
-473,Aina,NFO,4.5,4.4,-0.1
-520,Bergvall,TOT,5.4,5.3,-0.1
-94,Schade,BRE,6.1,6.2,0.1
-449,Hall,NEW,5.2,5.3,0.1
+36,Maatsen,AVL,4.5,4.4,-0.1
+210,Wharton,CRY,5.5,5.4,-0.1
+297,Gyabi,HUL,4.5,4.4,-0.1
+418,Maguire,MUN,4.9,4.8,-0.1
+437,Bendito Mantato,MUN,4.5,4.4,-0.1
