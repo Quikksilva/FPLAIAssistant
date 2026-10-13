@@ -1,16 +1,16 @@
 web_name,team_short,position,squad_slot,is_starting,is_captain,is_vice_captain,multiplier,gw_points_raw,gw_points_scored,current_price,purchase_price,status,chance_of_playing_next_round,news
 Raya,ARS,GKP,1,True,False,False,1,3,3,6.1,,a,,
-Hall,NEW,DEF,2,True,False,False,1,0,0,5.3,,a,,
-Gabriel,ARS,DEF,3,True,False,False,1,2,2,7.9,,a,,
-Calafiori,ARS,DEF,4,True,False,False,1,9,9,5.9,,a,,
-Slater,HUL,MID,5,True,False,False,1,2,2,4.5,,a,,
-Groß,BHA,MID,6,True,False,False,1,6,6,6.0,,a,,
-B.Fernandes,MUN,MID,7,True,False,True,1,1,1,11.9,,a,,
-Cherki,MCI,MID,8,True,False,False,1,10,10,7.8,,a,,
-Calvert-Lewin,LEE,FWD,9,True,False,False,1,2,2,6.0,,a,,
-Haaland,MCI,FWD,10,True,True,False,2,6,12,15.6,,a,,
-Brobbey,SUN,FWD,11,True,False,False,1,0,0,5.7,,i,0,Hamstring injury - Expected back 25 Oct
+Gabriel,ARS,DEF,2,True,False,False,1,2,2,7.9,,a,,
+Calafiori,ARS,DEF,3,True,False,False,1,9,9,5.9,,a,,
+Hall,NEW,DEF,4,True,False,False,1,0,0,5.3,,a,,
+Thomas,COV,DEF,5,True,False,False,1,4,4,4.0,,a,,
+Slater,HUL,MID,6,True,False,False,1,2,2,4.5,,a,,
+Groß,BHA,MID,7,True,False,False,1,6,6,6.0,,a,,
+B.Fernandes,MUN,MID,8,True,False,True,1,1,1,11.9,,a,,
+Cherki,MCI,MID,9,True,False,False,1,10,10,7.8,,a,,
+Calvert-Lewin,LEE,FWD,10,True,False,False,1,2,2,6.0,,a,,
+Haaland,MCI,FWD,11,True,True,False,2,6,12,15.6,,a,,
 Forster,BOU,GKP,12,False,False,False,0,0,0,4.0,,a,,
-Thomas,COV,DEF,13,False,False,False,0,0,0,4.0,,a,,
+Brobbey,SUN,FWD,13,False,False,False,0,0,0,5.7,,i,0,Hamstring injury - Expected back 25 Oct
 Hughes,CRY,MID,14,False,False,False,0,0,0,4.4,,a,,
-van Ewijk,COV,DEF,15,False,False,False,0,0,0,4.0,,d,75,Hamstring injury - 75% chance of playing
+van Ewijk,COV,DEF,15,False,False,False,0,6,0,3.9,,a,100,
