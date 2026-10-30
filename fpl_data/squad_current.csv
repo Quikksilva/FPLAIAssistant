@@ -1,9 +1,9 @@
 web_name,team_short,position,squad_slot,is_starting,is_captain,is_vice_captain,multiplier,gw_points_raw,gw_points_scored,current_price,purchase_price,status,chance_of_playing_next_round,news
 Raya,ARS,GKP,1,True,False,False,1,7,7,6.2,,a,,
 Gabriel,ARS,DEF,2,True,False,False,1,17,17,7.9,,a,,
-Calafiori,ARS,DEF,3,True,False,False,1,1,1,6.0,,d,75,Hip injury - 75% chance of playing
+Calafiori,ARS,DEF,3,True,False,False,1,1,1,5.9,,d,75,Hip injury - 75% chance of playing
 De Cuyper,BHA,DEF,4,True,False,False,1,1,1,5.3,,a,,
-Thomas,COV,DEF,5,True,False,False,1,1,1,4.0,,d,75,Unspecified injury - 75% chance of playing
+Thomas,COV,DEF,5,True,False,False,1,1,1,4.0,,d,50,Calf injury - 50% chance of playing
 Slater,HUL,MID,6,True,False,False,1,2,2,4.5,,a,,
 Groß,BHA,MID,7,True,False,False,1,0,0,6.2,,a,,
 Palmer,CHE,MID,8,True,False,True,1,-1,-1,9.8,,a,100,
