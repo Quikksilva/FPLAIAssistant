@@ -1,11 +1,11 @@
 {
-  "current_event_id": 9,
-  "current_event_name": "Gameweek 9",
-  "current_event_finished": true,
-  "current_event_data_checked": true,
+  "current_event_id": 10,
+  "current_event_name": "Gameweek 10",
+  "current_event_finished": false,
+  "current_event_data_checked": false,
   "most_recently_finished_event_id": 9,
   "most_recently_finished_event_data_checked": true,
-  "next_event_id": 10,
-  "next_event_deadline": "2026-11-06T18:30:00Z",
-  "checked_at_utc": "2026-11-06T15:46:09.839630+00:00"
+  "next_event_id": 11,
+  "next_event_deadline": "2026-11-21T11:00:00Z",
+  "checked_at_utc": "2026-11-07T14:45:10.471814+00:00"
 }
