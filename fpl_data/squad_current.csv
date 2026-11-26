@@ -1,5 +1,5 @@
 web_name,team_short,position,squad_slot,is_starting,is_captain,is_vice_captain,multiplier,gw_points_raw,gw_points_scored,current_price,purchase_price,status,chance_of_playing_next_round,news
-Raya,ARS,GKP,1,True,False,False,1,1,1,6.3,,d,50,Shoulder injury - 50% chance of playing
+Raya,ARS,GKP,1,True,False,False,1,1,1,6.2,,d,50,Shoulder injury - 50% chance of playing
 De Cuyper,BHA,DEF,2,True,False,False,1,1,1,5.5,,a,,
 Gabriel,ARS,DEF,3,True,False,False,1,1,1,8.1,,a,,
 Calafiori,ARS,DEF,4,True,False,False,1,1,1,5.9,,a,100,
